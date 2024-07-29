@@ -33,6 +33,11 @@ module.exports = (sequelize) => {
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "Users",
+          key: "user_id",
+        },
+        onDelete: "SET NULL",
       },
       comment: {
         type: DataTypes.STRING,
@@ -66,8 +71,8 @@ module.exports = (sequelize) => {
     {
       tableName: "Comments",
       timestamps: true,
-        charset: 'utf8mb4',
-        collate: 'utf8mb4_general_ci',
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
 
@@ -75,6 +80,10 @@ module.exports = (sequelize) => {
     Comment.belongsTo(models.Post, {
       foreignKey: "post_id",
       targetKey: "post_id",
+    });
+    Comment.belongsTo(models.User, {
+      foreignKey: "user_id",
+      targetKey: "user_id",
     });
   };
 
