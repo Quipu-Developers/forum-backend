@@ -49,6 +49,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      content: {
+        type: DataTypes.JSON,
+        allowNull: false,
+      },
     },
     {
       tableName: "Posts",
