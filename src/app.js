@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const path = require("path");
@@ -48,4 +48,14 @@ app.use(session({
 app.use(passport.initialize()); // req.user, req.login, req.isAuthenticate, req.logout
 app.use(passport.session()); //connect.id라는 이름으로 세션 쿠키가 브라우져로 전송
 
-app.use('./auth', authRouter);
+app.use('/auth', authRouter);
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({
+        error: {
+            message: 'Internet Server Error'
+        }
+    })
+});
+
+
