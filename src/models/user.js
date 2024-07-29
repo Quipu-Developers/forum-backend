@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             student_id: {
                 type: DataTypes.STRING,
-                uniqueKey: true,
+                unique: true,
                 allowNull: false,
             },
             major: {
