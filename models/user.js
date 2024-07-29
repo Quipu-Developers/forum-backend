@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       student_id: {
-          type: DataTypes.STRING,
-          uniqueKey: true,
-          allowNull: false,
+        type: DataTypes.STRING,
+        uniqueKey: true,
+        allowNull: false,
       },
       major: {
         type: DataTypes.STRING,
@@ -32,14 +32,21 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: "Users",
       timestamps: true,
-        paranoid: true,
-        charset: 'utf8',
-        collate: 'utf8_general_ci',
+      paranoid: true,
+      charset: "utf8",
+      collate: "utf8_general_ci",
     }
   );
 
   User.associate = function (models) {
-    // Define associations here
+    User.hasMany(models.Post, {
+      foreignKey: "user_id",
+      sourceKey: "user_id",
+    });
+    User.hasMany(models.Comment, {
+      foreignKey: "user_id",
+      sourceKey: "user_id",
+    });
   };
 
   return User;

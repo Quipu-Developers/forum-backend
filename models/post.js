@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "Users",
+          key: "user_id",
+        },
+        onDelete: "SET NULL",
       },
       title: {
         type: DataTypes.STRING,
@@ -57,12 +62,16 @@ module.exports = (sequelize) => {
     {
       tableName: "Posts",
       timestamps: true,
-        charset: 'utf8mb4',
-        collate: 'utf8mb4_general_ci',
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
 
   Post.associate = function (models) {
+    Post.belongsTo(models.User, {
+      foreignKey: "user_id",
+      targetKey: "user_id",
+    });
     Post.hasMany(models.Comment, {
       foreignKey: "post_id",
       sourceKey: "post_id",
