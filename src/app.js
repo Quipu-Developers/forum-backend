@@ -12,6 +12,7 @@ const passportConfig = require("./passport");
 passportConfig();
 const authRouter = require('./routes/auth');
 const app = express();
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

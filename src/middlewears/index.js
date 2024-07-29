@@ -6,7 +6,7 @@ exports.isLoggedin = (req, res, next) => {
     }
 }
 
-exports.isLoggedin = (req, res, next) => {
+exports.isNotLoggedin = (req, res, next) => {
     if (!req.isAuthorized()){
         next();
     }   else{
