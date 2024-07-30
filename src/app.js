@@ -5,6 +5,7 @@ const path = require("path");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const PORT = process.env.PORT || 3001;
+const postRoutes = require('./src/routes/postRoutes');
 
 dotenv.config(); //process.env
 const { sequelize } = require("./models");
@@ -14,6 +15,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use('/board', postRoutes);
 
 sequelize
   .authenticate()

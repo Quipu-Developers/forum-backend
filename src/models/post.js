@@ -24,7 +24,6 @@ module.exports = (sequelize) => {
                     model: "Users",
                     key: "user_id",
                 },
-                onDelete: "SET NULL",
             },
             title: {
                 type: DataTypes.STRING,
