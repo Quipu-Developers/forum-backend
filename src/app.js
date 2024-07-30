@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const path = require("path");
@@ -6,8 +6,9 @@ const session = require("express-session");
 const dotenv = require("dotenv");
 const passport = require("passport");
 const PORT = process.env.PORT || 3001;
+
 dotenv.config(); //process.env
-const { sequelize } = require("./models");
+const { forumSequelize, joinquipuSequelize } = require("./models");
 const passportConfig = require("./passport");
 passportConfig();
 const authRouter = require('./routes/auth');
@@ -16,25 +17,6 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-sequelize
-    .authenticate()
-    .then(() => {
-        console.log("DB 연결");
-        //return sequelize.sync({ alter: true });
-        return sequelize.sync({});
-    })
-    .then(() => {
-        console.log("DB 동기화");
-        app.listen(PORT, () => {
-            console.log(`port:${PORT}`);
-            //console.log(`swagger: http://localhost:${PORT}/api-docs`);
-        });
-    })
-    .catch((err) => {
-        console.error("DB 연결 실패:", err);
-    });
-
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
     resave: false,
@@ -47,6 +29,33 @@ app.use(session({
 }));
 app.use(passport.initialize()); // req.user, req.login, req.isAuthenticate, req.logout
 app.use(passport.session()); //connect.id라는 이름으로 세션 쿠키가 브라우져로 전송
+
+
+async function DBConnections() {
+    try {
+        // forum 스키마에 대한 인증 및 동기화
+        await forumSequelize.authenticate();
+        console.log("forum 스키마 DB 연결");
+        await forumSequelize.sync({});
+        console.log("forum 스키마 DB 동기화");
+
+        // joinquipu 스키마에 대한 인증 및 동기화
+        await joinquipuSequelize.authenticate();
+        console.log("joinquipu 스키마 DB 연결");
+        await joinquipuSequelize.sync({});
+        console.log("joinquipu 스키마 DB 동기화");
+
+        // 서버 시작
+        app.listen(PORT, () => {
+            console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
+        });
+    } catch (err) {
+        console.error("DB 연결 실패:", err);
+    }
+}
+
+DBConnections();
+
 
 app.use('/auth', authRouter);
 app.use((err, req, res, next) => {

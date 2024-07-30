@@ -1,18 +1,44 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const config = require(__dirname + "/../config/config.json")["development"];
-const sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
+//const { Sequelize, DataTypes } = require("sequelize");
+const Sequelize = require("sequelize");
+const forumConfig = require(__dirname + "/../config/forumConfig.json")[
+  "development"
+];
+const joinquipuConfig = require(__dirname + "/../config/joinquipuConfig.json")[
+  "development"
+];
+
+const forumSequelize = new Sequelize(
+  forumConfig.database,
+  forumConfig.username,
+  forumConfig.password,
+  forumConfig
 );
-const User = require("./user")(sequelize, DataTypes);
-const Post = require("./post")(sequelize, DataTypes);
-const Comment = require("./comment")(sequelize, DataTypes);
+
+const joinquipuSequelize = new Sequelize(
+  joinquipuConfig.database,
+  joinquipuConfig.username,
+  joinquipuConfig.password,
+  joinquipuConfig
+);
+
+const User = require("./user");
+const Post = require("./post");
+const Comment = require("./comment");
+const General_member = require("./general_member");
+const Dev_member = require("./dev_member");
+
+User.initiate(forumSequelize);
+Post.initiate(forumSequelize);
+Comment.initiate(forumSequelize);
+General_member.initiate(joinquipuSequelize);
+Dev_member.initiate(joinquipuSequelize);
+
 const models = {
   User,
   Post,
   Comment,
+  General_member,
+  Dev_member,
 };
 
 
@@ -22,7 +48,9 @@ Object.keys(models).forEach((modelName) => {
   }
 });
 
-models.sequelize = sequelize;
-models.Sequelize = Sequelize;
-
-module.exports = models;
+module.exports = {
+  forumSequelize,
+  joinquipuSequelize,
+  Sequelize,
+  ...models,
+};
