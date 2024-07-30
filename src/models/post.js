@@ -1,82 +1,60 @@
-const { DataTypes } = require("sequelize");
-
-module.exports = (sequelize) => {
-    const Post = sequelize.define(
-        "Post",
-        {
-            post_id: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-            },
-            board_type: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            user_name: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            user_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: "Users",
-                    key: "user_id",
-                },
-                onDelete: "SET NULL",
-            },
-            title: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            post_time: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            edit_time: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
-            file_name: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
-            file_size: {
-                type: DataTypes.INTEGER,
-                allowNull: true,
-            },
-            file_type: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
-            file_url: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
-            content: {
-                type: DataTypes.JSON,
-                allowNull: false,
-            },
+class Post extends Sequelize.Model {
+  static initiate(sequelize) {
+    Post.init(
+      {
+        post_id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
         },
-        {
-            tableName: "Posts",
-            timestamps: true,
-            charset: "utf8mb4",
-            collate: "utf8mb4_general_ci",
-        }
+        board_type: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        user_name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          references: {
+            model: "User",
+            key: "id",
+          },
+          onDelete: "SET NULL",
+        },
+        title: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        content: {
+          type: DataTypes.JSON,
+          allowNull: false,
+        },
+      },
+      {
+        sequelize,
+        modelName: "Post",
+        tableName: "posts",
+        timestamps: true,
+        paranoid: true,
+        charset: "utf8mb4",
+        collate: "utf8mb4_general_ci",
+      }
     );
+  }
 
-    Post.associate = function (models) {
-        Post.belongsTo(models.User, {
-            foreignKey: "user_id",
-            targetKey: "user_id",
-        });
-        Post.hasMany(models.Comment, {
-            foreignKey: "post_id",
-            sourceKey: "post_id",
-        });
-    };
+  static associate(models) {
+    Post.belongsTo(models.User, {
+      foreignKey: "id",
+      targetKey: "id",
+    });
+    Post.hasMany(models.Comment, {
+      foreignKey: "post_id",
+      sourceKey: "post_id",
+    });
+  }
+}
 
-    return Post;
-};
+module.exports = Post;
