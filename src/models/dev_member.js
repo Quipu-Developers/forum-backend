@@ -1,57 +1,59 @@
-const Sequelize = require("sequelize");
+const { DataTypes } = require("sequelize");
+const Sequelize = require('sequelize');
+
 
 class Dev_member extends Sequelize.Model {
   static initiate(sequelize) {
     Dev_member.init(
       {
         id: {
-          type: Sequelize.INTEGER,
+          type: DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true,
         },
         name: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         student_id: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
           unique: true,
         },
         major: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         phone_number: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         motivation: {
-          type: Sequelize.TEXT,
+          type: DataTypes.TEXT,
           allowNull: false,
         },
         project_description: {
-          type: Sequelize.TEXT,
+          type: DataTypes.TEXT,
           allowNull: false,
         },
         portfolio_pdf: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         github_profile: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         github_email: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         slack_email: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         willing_general_member: {
-          type: Sequelize.BOOLEAN,
+          type: DataTypes.BOOLEAN,
           allowNull: false,
         },
       },

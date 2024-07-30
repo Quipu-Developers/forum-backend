@@ -1,4 +1,5 @@
-const { Sequelize, DataTypes } = require("sequelize");
+//const { Sequelize, DataTypes } = require("sequelize");
+const Sequelize = require("sequelize");
 const forumConfig = require(__dirname + "/../config/forumConfig.json")[
   "development"
 ];
