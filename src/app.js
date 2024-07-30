@@ -50,7 +50,7 @@ app.use(passport.session()); //connect.id라는 이름으로 세션 쿠키가 �
 
 app.use('/auth', authRouter);
 app.use((err, req, res, next) => {
-    console.error(err);
+    console.error(err.stack || err);
     res.status(500).json({
         error: {
             message: 'Internet Server Error'
