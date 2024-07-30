@@ -1,3 +1,6 @@
+const { DataTypes } = require("sequelize");
+const Sequelize = require('sequelize');
+
 class Comment extends Sequelize.Model {
   static initiate(sequelize) {
     Comment.init(

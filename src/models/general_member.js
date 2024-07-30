@@ -1,32 +1,33 @@
+const {DataTypes} = require('sequelize');
 const Sequelize = require("sequelize");
 class General_member extends Sequelize.Model {
   static initiate(sequelize) {
     General_member.init(
       {
         id: {
-          type: Sequelize.INTEGER,
+          type: DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true,
         },
         name: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         student_id: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
           unique: true,
         },
         major: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         phone_number: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         motivation: {
-          type: Sequelize.TEXT,
+          type: DataTypes.TEXT,
           allowNull: false,
         },
       },
