@@ -43,13 +43,14 @@ class General_member extends Sequelize.Model {
       }
     );
   }
-
+  /*
   static associate(models) {
     General_member.hasOne(models.User, {
       foreignKey: "student_id",
       sourceKey: "student_id",
     });
   }
+   */
 }
 
 module.exports = General_member;

@@ -1,20 +1,23 @@
-const { User } = require('../models/user')
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const {DataTypes} = require("sequelize");
-//const General_member = require('../models/general_member');
-
+const { DataTypes} = require("sequelize");
+const { General_member} = require('../models');
+const { Dev_member} = require('../models');
+const { User } = require('../models')
 //회원가입
 exports.join = async (req, res, next) => {
-    const { student_id, password, } = req.body;
     try {
         const {student_id, email, password} = req.body;
-        const exUser = await General_member.findOne({ where: {student_id}});
-        //아직 General_member 모델 안 받아서 안됌.
-        if (!exUser){
+        const generalMember = await General_member.findOne({ where: { student_id }});
+        const devMember = !generalMember ? await Dev_member.findOne({ where: { student_id }}) : null;
+        if (!generalMember && !devMember){
             return res.status(409).send('퀴푸 회원이 아님');
         }
-        const Userdata = exUser.toJSON();
+        const exUser = await User.findOne({where: {student_id}});
+        if (exUser){
+            return res.status(409).send('이미 회원가입했음')
+        }
+        const Userdata = quipumember.toJSON();
         const hash = await bcrypt.hash(password, 12);
         await User.create({
             user_name: Userdata.name,
