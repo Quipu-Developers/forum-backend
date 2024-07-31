@@ -69,13 +69,14 @@ class Dev_member extends Sequelize.Model {
       }
     );
   }
-
+  /*
   static associate(models) {
     Dev_member.hasOne(models.User, {
       foreignKey: "student_id",
       sourceKey: "student_id",
     });
   }
+   */
 }
 
 module.exports = Dev_member;

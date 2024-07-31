@@ -9,4 +9,5 @@ router.post('/join', isNotLoggedin, join);
 router.post('/login', isNotLoggedin, login);
 // GET /auth/logout
 router.get('/logout', isLoggedin, logout);
+
 module.exports = router;

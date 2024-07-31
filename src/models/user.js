@@ -53,6 +53,7 @@ class User extends Sequelize.Model {
       foreignKey: "id",
       sourceKey: "id",
     });
+    /*
     User.belongsTo(models.General_member, {
       foreignKey: "student_id",
       targetKey: "student_id",
@@ -61,6 +62,7 @@ class User extends Sequelize.Model {
       foreignKey: "student_id",
       targetKey: "student_id",
     });
+     */
   }
 }
 
