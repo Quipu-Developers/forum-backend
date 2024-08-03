@@ -17,7 +17,13 @@ exports.join = async (req, res, next) => {
         if (exUser){
             return res.status(409).send('이미 회원가입했음')
         }
-        const Userdata = quipumember.toJSON();
+        let Userdata = null;
+        if (generalMember) {
+            Userdata = generalMember.toJSON();
+        }
+        else if (devMember) {
+            Userdata = devMember.toJSON();
+        }
         const hash = await bcrypt.hash(password, 12);
         await User.create({
             user_name: Userdata.name,

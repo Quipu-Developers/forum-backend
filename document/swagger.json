@@ -30,7 +30,7 @@
                   "password": {
                     "type": "string",
                     "description": "생성 계정의 비밀번호",
-                    "example": "01096761452"
+                    "example": "quipu1234"
                   }
                 },
                 "required": ["student_id", "email", "password"]
