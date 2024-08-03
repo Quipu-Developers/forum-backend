@@ -23,14 +23,6 @@ class Coding_board_comment extends Sequelize.Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                post_id: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                },
-                user_id: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                }
             },
             {
                 sequelize,
@@ -46,8 +38,8 @@ class Coding_board_comment extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Coding_board_comment.belongsTo(db.User, {foreignKey : 'user_id', targetKey : 'user_id'});
-        db.Coding_board_comment.belongsTo(db.Coding_board, {foreignKey : 'post_id', targetKey : 'post_id'});
+        db.Coding_board_comment.belongsTo(db.User);
+        db.Coding_board_comment.belongsTo(db.Coding_board);
     }
 }
 
