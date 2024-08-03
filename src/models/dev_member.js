@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 const Sequelize = require('sequelize');
 
-
 class Dev_member extends Sequelize.Model {
   static initiate(sequelize) {
     Dev_member.init(
@@ -68,13 +67,6 @@ class Dev_member extends Sequelize.Model {
         collate: "utf8mb4_general_ci",
       }
     );
-  }
-
-  static associate(models) {
-    Dev_member.hasOne(models.User, {
-      foreignKey: "student_id",
-      sourceKey: "student_id",
-    });
   }
 }
 
