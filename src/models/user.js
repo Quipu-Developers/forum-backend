@@ -5,10 +5,11 @@ class User extends Sequelize.Model {
   static initiate(sequelize) {
     User.init(
       {
-        id: {
+        user_id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
+            allowNull: false,
         },
         user_name: {
           type: DataTypes.STRING,
@@ -37,6 +38,7 @@ class User extends Sequelize.Model {
         modelName: "User",
         tableName: "users",
         timestamps: true,
+          underscored: true,
         paranoid: true,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -44,25 +46,15 @@ class User extends Sequelize.Model {
     );
   }
 
-  static associate(models) {
-    User.hasMany(models.Post, {
-      foreignKey: "id",
-      sourceKey: "id",
-    });
-    User.hasMany(models.Comment, {
-      foreignKey: "id",
-      sourceKey: "id",
-    });
-    /*
-    User.belongsTo(models.General_member, {
-      foreignKey: "student_id",
-      targetKey: "student_id",
-    });
-    User.belongsTo(models.Dev_member, {
-      foreignKey: "student_id",
-      targetKey: "student_id",
-    });
-     */
+  static associate(db) {
+      db.User.hasMany(db.Free_board);
+      db.User.hasMany(db.Free_board_comment)
+      db.User.hasMany(db.Coding_board);
+      db.User.hasMany(db.Coding_board_comment)
+      db.User.hasMany(db.Info_board);
+      db.User.hasMany(db.Info_board_comment)
+      db.User.hasMany(db.Gallery);
+
   }
 }
 
