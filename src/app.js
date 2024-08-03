@@ -72,13 +72,13 @@ async function DBConnections() {
         // forum 스키마에 대한 인증 및 동기화
         await forumSequelize.authenticate();
         console.log("forum 스키마 DB 연결");
-        await forumSequelize.sync({});
+        await forumSequelize.sync({force:true});
         console.log("forum 스키마 DB 동기화");
 
         // joinquipu 스키마에 대한 인증 및 동기화
         await joinquipuSequelize.authenticate();
         console.log("joinquipu 스키마 DB 연결");
-        await joinquipuSequelize.sync({});
+        await joinquipuSequelize.sync();
         console.log("joinquipu 스키마 DB 동기화");
 
         // 서버 시작
