@@ -9,7 +9,7 @@
   "test": {
     "username": "quipu0316",
     "password": "q0u3i1p6u",
-    "database": "test",
+    "database": "forum_test",
     "host": "quipu.cd22uyeacdjw.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
