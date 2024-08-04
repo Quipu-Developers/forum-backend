@@ -5,7 +5,11 @@ const path = require("path");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const PORT = process.env.PORT || 3001;
-const postRoutes = require('./src/routes/postRoutes');
+const bodyParser = require('body-parser');
+
+const freeBoardRoute = require('./routes/freeBoardRoute');
+const infoBoardRoute = require('./routes/infoBoardRoute');
+const { swaggerUi, specs } = require('./swagger');
 
 dotenv.config(); //process.env
 const { forumSequelize, joinquipuSequelize } = require("./models");
@@ -15,7 +19,14 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use('/board', postRoutes);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/board', freeBoardRoute);
+app.use('/board', infoBoardRoute);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 async function DBConnections() {
