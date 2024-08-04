@@ -10,6 +10,7 @@ module.exports = () => {
         passReqToCallback: false,
     }, async (student_id, password, done) => {
         try{
+            console.log(`Received student_id: ${student_id}, password: ${password}`);
             const exUser = await User.findOne({where: {student_id}});
             if (exUser){
                 const result = await bcrypt.compare(password, exUser.password);
