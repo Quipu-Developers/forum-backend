@@ -10,7 +10,8 @@ exports.isNotLoggedin = (req, res, next) => {
     if (!req.isAuthenticated()){
         next();
     }   else{
-        const message = encodeURIComponent('로그인한 상태입니다.');
-        res.redirect(`/?error=${message}`); //그냥 오류코드로 수정하면 될듯
+        res.status(403).send('로그인한 상태입니다.')
+        //const message = encodeURIComponent('로그인한 상태입니다.');
+        //res.redirect(`/?error=${message}`); //그냥 오류코드로 수정하면 될듯
     }
 }
