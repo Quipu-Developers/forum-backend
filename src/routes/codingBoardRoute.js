@@ -1,21 +1,21 @@
 const express = require('express');
-const boardController = require('../controllers/freeBoardController');
+const codingBoardController = require('../controllers/codingBoardController');
 
 const router = express.Router();
 
 /**
  * @swagger
  * tags:
- *   name: FreeBoard
- *   description: Free Board API
+ *   name: CodingBoard
+ *   description: Coding Board API
  */
 
 /**
  * @swagger
- * /board/free/posts:
+ * /board/coding/posts:
  *   post:
  *     summary: Create a new post
- *     tags: [FreeBoard]
+ *     tags: [CodingBoard]
  *     requestBody:
  *       required: true
  *       content:
@@ -54,14 +54,14 @@ const router = express.Router();
  *       500:
  *         description: Some server error
  */
-router.post('/free/posts', boardController.createPost);
+router.post('/coding/posts', codingBoardController.createPost);
 
 /**
  * @swagger
- * /board/free/posts:
+ * /board/coding/posts:
  *   get:
  *     summary: Returns the list of all the posts
- *     tags: [FreeBoard]
+ *     tags: [CodingBoard]
  *     responses:
  *       200:
  *         description: The list of the posts
@@ -74,14 +74,14 @@ router.post('/free/posts', boardController.createPost);
  *       500:
  *         description: Some server error
  */
-router.get('/free/posts', boardController.getAllPosts);
+router.get('/coding/posts', codingBoardController.getAllPosts);
 
 /**
  * @swagger
- * /board/free/posts/{id}:
+ * /board/coding/posts/{id}:
  *   get:
  *     summary: Get a post by ID
- *     tags: [FreeBoard]
+ *     tags: [CodingBoard]
  *     parameters:
  *       - in: path
  *         name: id
@@ -101,14 +101,14 @@ router.get('/free/posts', boardController.getAllPosts);
  *       500:
  *         description: Some server error
  */
-router.get('/free/posts/:id', boardController.getPostById);
+router.get('/coding/posts/:id', codingBoardController.getPostById);
 
 /**
  * @swagger
- * /board/free/posts/{id}:
+ * /board/coding/posts/{id}:
  *   put:
  *     summary: Update a post by ID
- *     tags: [FreeBoard]
+ *     tags: [CodingBoard]
  *     parameters:
  *       - in: path
  *         name: id
@@ -144,14 +144,14 @@ router.get('/free/posts/:id', boardController.getPostById);
  *       500:
  *         description: Some server error
  */
-router.put('/free/posts/:id', boardController.updatePost);
+router.put('/coding/posts/:id', codingBoardController.updatePost);
 
 /**
  * @swagger
- * /board/free/posts/{id}:
+ * /board/coding/posts/{id}:
  *   delete:
  *     summary: Delete a post by ID
- *     tags: [FreeBoard]
+ *     tags: [CodingBoard]
  *     parameters:
  *       - in: path
  *         name: id
@@ -167,6 +167,6 @@ router.put('/free/posts/:id', boardController.updatePost);
  *       500:
  *         description: Some server error
  */
-router.delete('/free/posts/:id', boardController.deletePost);
+router.delete('/coding/posts/:id', codingBoardController.deletePost);
 
 module.exports = router;

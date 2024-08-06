@@ -6,9 +6,15 @@ const session = require("express-session");
 const dotenv = require("dotenv");
 const PORT = process.env.PORT || 3001;
 const bodyParser = require('body-parser');
+const initialize = require('./initialize');
 
 const freeBoardRoute = require('./routes/freeBoardRoute');
 const infoBoardRoute = require('./routes/infoBoardRoute');
+const codingBoardRoute = require('./routes/codingBoardRoute');
+const infoBoardCommentRoute = require('./routes/infoBoardCommentRoute');
+const codingBoardCommentRoute = require('./routes/codingBoardCommentRoute');
+const freeBoardCommentRoute = require('./routes/freeBoardCommentRoute');
+
 const { swaggerUi, specs } = require('./swagger');
 
 dotenv.config(); //process.env
@@ -25,6 +31,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/board', freeBoardRoute);
 app.use('/board', infoBoardRoute);
+app.use('/board', codingBoardRoute);
+app.use('/board', infoBoardCommentRoute);
+app.use('/board', codingBoardCommentRoute);
+app.use('/board', freeBoardCommentRoute);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
@@ -36,6 +46,8 @@ async function DBConnections() {
         console.log("forum 스키마 DB 연결");
         await forumSequelize.sync({force:true});
         console.log("forum 스키마 DB 동기화");
+
+        await initialize();
 
         // joinquipu 스키마에 대한 인증 및 동기화
         await joinquipuSequelize.authenticate();
