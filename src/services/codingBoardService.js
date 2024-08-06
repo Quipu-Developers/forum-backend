@@ -1,8 +1,8 @@
-const { Info_board, User } = require('../models');
+const { Coding_board } = require('../models');
 
 const createPost = async (data) => {
     try {
-        const post = await Info_board.create(data);
+        const post = await Coding_board.create(data);
         return post;
     } catch (error) {
         throw error;
@@ -11,17 +11,16 @@ const createPost = async (data) => {
 
 const getAllPosts = async () => {
     try {
-        const posts = await Info_board.findAll();
+        const posts = await Coding_board.findAll();
         return posts;
     } catch (error) {
         throw error;
     }
 };
 
-
 const getPostById = async (postId) => {
     try {
-        const post = await Info_board.findByPk(postId);
+        const post = await Coding_board.findByPk(postId);
         return post;
     } catch (error) {
         throw error;
@@ -30,7 +29,7 @@ const getPostById = async (postId) => {
 
 const updatePost = async (postId, data) => {
     try {
-        const updated = await Info_board.update(data, { where: { post_id: postId } });
+        const updated = await Coding_board.update(data, { where: { post_id: postId } });
         return updated;
     } catch (error) {
         throw error;
@@ -39,7 +38,7 @@ const updatePost = async (postId, data) => {
 
 const deletePost = async (postId) => {
     try {
-        const deleted = await Info_board.destroy({ where: { post_id: postId } });
+        const deleted = await Coding_board.destroy({ where: { post_id: postId } });
         return deleted;
     } catch (error) {
         throw error;

@@ -11,6 +11,10 @@ class Info_board extends Sequelize.Model {
                     autoIncrement: true,
                     allowNull: false,
                 },
+                user_id: {  // user_id 필드를 추가
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
                 user_name: {
                     type: DataTypes.STRING,
                     allowNull: false,
@@ -38,8 +42,8 @@ class Info_board extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Info_board.belongsTo(db.User);
-        db.Info_board.hasMany(db.Info_board_comment);
+        db.Info_board.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
+        db.Info_board.hasMany(db.Info_board_comment, { foreignKey: 'post_id', sourceKey: 'post_id' });
     }
 }
 
