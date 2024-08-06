@@ -25,6 +25,8 @@ const router = express.Router();
  *             required:
  *               - user_name
  *               - comment
+ *               - post_id
+ *               - user_id
  *             properties:
  *               parent_comment_id:
  *                 type: integer
@@ -35,6 +37,12 @@ const router = express.Router();
  *               comment:
  *                 type: string
  *                 description: Content of the comment
+ *               post_id:
+ *                 type: integer
+ *                 description: ID of the post the comment is associated with
+ *               user_id:
+ *                 type: integer
+ *                 description: ID of the user making the comment
  *           examples:
  *             example1:
  *               summary: An example of a request body
@@ -42,6 +50,8 @@ const router = express.Router();
  *                 parent_comment_id: 1
  *                 user_name: "test_user"
  *                 comment: "Test Comment"
+ *                 post_id: 1
+ *                 user_id: 1
  *     responses:
  *       201:
  *         description: The comment was successfully created
