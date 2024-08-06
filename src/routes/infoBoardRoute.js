@@ -23,10 +23,14 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
+ *               - user_id
  *               - user_name
  *               - title
  *               - content
  *             properties:
+ *               user_id:
+ *                 type: integer
+ *                 description: ID of the user
  *               user_name:
  *                 type: string
  *                 description: Name of the user
@@ -40,6 +44,7 @@ const router = express.Router();
  *             example1:
  *               summary: An example of a request body
  *               value:
+ *                 user_id: 1
  *                 user_name: "test_user"
  *                 title: "Test Title"
  *                 content: {"body": "Test Content"}

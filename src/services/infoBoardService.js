@@ -1,4 +1,4 @@
-const { Info_board } = require('../models');
+const { Info_board, User } = require('../models');
 
 const createPost = async (data) => {
     try {
@@ -17,6 +17,7 @@ const getAllPosts = async () => {
         throw error;
     }
 };
+
 
 const getPostById = async (postId) => {
     try {
