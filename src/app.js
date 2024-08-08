@@ -21,7 +21,7 @@ async function DBConnections() {
         // forum 스키마에 대한 인증 및 동기화
         await forumSequelize.authenticate();
         console.log("forum 스키마 DB 연결");
-        await forumSequelize.sync({force:true});
+        await forumSequelize.sync({});
         console.log("forum 스키마 DB 동기화");
 
         // joinquipu 스키마에 대한 인증 및 동기화
