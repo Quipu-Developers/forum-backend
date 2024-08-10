@@ -51,7 +51,6 @@ async function DBConnections() {
         // 서버 시작
         app.listen(PORT, () => {
             console.log(`swagger: http://localhost:${PORT}/api-docs`);
-            console.log('COOKIE_SECRET:', process.env.COOKIE_SECRET);
         });
     } catch (err) {
         console.error("DB 연결 실패:", err);

@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "forum APi",
+    "title": "forum API",
     "version": "0.0.1",
-    "description": "quipu forum api용 swagger"
+    "description": "quipu forum API용 Swagger"
   },
   "paths": {
     "/auth/join": {
@@ -84,7 +84,7 @@
                   },
                   "password": {
                     "type": "string",
-                    "description": "계정의 id. 테스트 시에는 반드시 quipu1234로 해주세요",
+                    "description": "계정의 비밀번호. 테스트 시에는 반드시 quipu1234로 해주세요",
                     "example": "quipu1234"
                   }
                 },
@@ -135,7 +135,7 @@
     "/auth/logout": {
       "get": {
         "summary": "로그아웃",
-        "description": "사용자 로그아웃을 처리합니다.",
+        "description": "사용자 로그아웃을 처리합니다. 클라이언트 측에서 토큰을 삭제하여 로그아웃을 구현합니다.",
         "responses": {
           "200": {
             "description": "로그아웃 성공",
