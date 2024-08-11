@@ -1,5 +1,6 @@
 const express = require('express');
-const boardController = require('../controllers/freeBoardController');
+const boardController = require('../controllers/boardController');
+const freeBoard = require('../models/forumModels/free_board');
 
 const router = express.Router();
 
@@ -54,7 +55,7 @@ const router = express.Router();
  *       500:
  *         description: Some server error
  */
-router.post('/free/posts', boardController.createPost);
+router.post('/free/posts', (req,res) => boardController.createPost(freeBoard,req,res));
 
 /**
  * @swagger
@@ -74,7 +75,7 @@ router.post('/free/posts', boardController.createPost);
  *       500:
  *         description: Some server error
  */
-router.get('/free/posts', boardController.getAllPosts);
+router.get('/free/posts', (req, res) => boardController.getAllPosts(freeBoard,req,res));
 
 /**
  * @swagger
@@ -101,7 +102,7 @@ router.get('/free/posts', boardController.getAllPosts);
  *       500:
  *         description: Some server error
  */
-router.get('/free/posts/:id', boardController.getPostById);
+router.get('/free/posts/:id', (req, res) => boardController.getPostById(freeBoard,req,res));
 
 /**
  * @swagger
@@ -144,7 +145,7 @@ router.get('/free/posts/:id', boardController.getPostById);
  *       500:
  *         description: Some server error
  */
-router.put('/free/posts/:id', boardController.updatePost);
+router.put('/free/posts/:id', (req, res) => boardController.updatePost(freeBoard,req,res));
 
 /**
  * @swagger
@@ -167,6 +168,6 @@ router.put('/free/posts/:id', boardController.updatePost);
  *       500:
  *         description: Some server error
  */
-router.delete('/free/posts/:id', boardController.deletePost);
+router.delete('/free/posts/:id', (req, res) => boardController.deletePost(freeBoard,req,res));
 
 module.exports = router;
