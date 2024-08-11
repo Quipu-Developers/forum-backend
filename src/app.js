@@ -5,9 +5,11 @@ const path = require("path");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const passport = require("passport");
+const redisClient = require("config/redisClient");
 const PORT = process.env.PORT || 3001;
 
 dotenv.config(); //process.env
+
 const { forumSequelize, joinquipuSequelize } = require("./models");
 const passportConfig = require("./passport");
 passportConfig();
@@ -44,6 +46,11 @@ async function DBConnections() {
         console.log("joinquipu 스키마 DB 연결");
         await joinquipuSequelize.sync();
         console.log("joinquipu 스키마 DB 동기화");
+
+        //redis 연결
+        await redisClient.connect().catch(console.error);
+        await redisClient.select(0);
+        console.log("redis 연결, DB index: 0");
 
         // 서버 시작
         app.listen(PORT, () => {

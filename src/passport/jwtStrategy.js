@@ -1,29 +1,24 @@
 const passport = require('passport');
-const bcrypt = require('bcrypt');
-const { Strategy: LocalStrategy} = require('passport-local');
+const dotenv = require('dotenv');
+dotenv.config({path : '../.env'})
+const { Strategy: JwtStrategy, ExtractJwt} = require('passport-jwt');
 const { User } = require('../models')
 
 module.exports = () => {
-    passport.use(new LocalStrategy({
-        usernameField: 'student_id', //req.body.student_id
-        passwordField: 'password', //req.body.password
-        passReqToCallback: false,
-    }, async (student_id, password, done) => {
-        try{
-            console.log(`Received student_id: ${student_id}, password: ${password}`);
-            const exUser = await User.findOne({where: {student_id}});
-            if (exUser){
-                const result = await bcrypt.compare(password, exUser.password);
-                if (result) {
-                    done(null, exUser);
-                } else {
-                    done(null, false, {message: '비밀번호가 틀림.'});
-                }
+    // JWT 전략 설정
+    passport.use(new JwtStrategy({
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: process.env.ACCESS_SECRET,
+    }, async (jwtPayload, done) => {
+        try {
+            console.log(`Received JWT payload: ${JSON.stringify(jwtPayload)}`);
+            const exUser = await User.findOne({ where: { student_id: jwtPayload.student_id } });
+            if (exUser) {
+                done(null, exUser);
             } else {
-                done(null, false, {message: '가입되지 않은 회원'});
+                done(null, false, { message: '유효하지 않은 JWT 토큰입니다.' });
             }
-        } catch(error){
-            console.error(error);
+        } catch (error) {
             done(error);
         }
     }));
