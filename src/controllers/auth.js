@@ -1,9 +1,12 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const { DataTypes} = require("sequelize");
+const jwt = require('jsonwebtoken');
 const { General_member} = require('../models');
 const { Dev_member} = require('../models');
-const { User } = require('../models')
+const { User } = require('../models');
+const redisClient = require('../config/redisClient');
+const dotenv = require('dotenv');
+dotenv.config({path : '../.env'});
 //회원가입
 exports.join = async (req, res, next) => {
     try {
@@ -40,26 +43,87 @@ exports.join = async (req, res, next) => {
 }
 //로그인
 exports.login = (req, res, next) => {
-    passport.authenticate('local', (authError, user, info) => {
-        if (authError) { // 서버 실패
+    passport.authenticate('local', async (authError, user, info) => {
+        if (authError) {
             console.error(authError);
             return next(authError);
         }
-        if (!user) { //로직 실패(가입되지 않은 유저 or 비밀번호 틀림)
+        if (!user) {
             return res.status(401).send(`${info.message}`);
         }
-        return req.login(user, (loginError) => { //로그인 성공
-            if (loginError) {
-                console.error(loginError);
-                return next(loginError);
+        try {
+            const payload = { student_id: user.student_id };
+            const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '1h' }); // accessToken 발급
+            const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, { expiresIn: '7d' }); // refreshToken 발급
+            const existingToken = await redisClient.get(`refreshToken:${user.student_id}`);
+            if (existingToken) {
+                await redisClient.del(`refreshToken:${user.student_id}`);
+                console.log("기존 Refresh Token 삭제");
             }
-            return res.status(200).send('로그인 성공');
-        })
-    })(req, res, next); //미들웨어 확장
-}
-//로그아웃
-exports.logout = (req, res, next) => {
-    req.logout(() => {
+            await redisClient.set(`refreshToken:${user.student_id}`, refreshToken);
+            console.log("refreshToken 저장");
+            return res.status(200).json({
+                accessToken,
+                refreshToken,
+                message: '로그인 성공',
+                user: {
+                    name: user.user_name,
+                    student_id: user.student_id,
+                    email: user.email,
+                    major: user.major
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            next(error);
+        }
+    })(req, res, next);
+};
+
+//로그아웃, chatgpt라 수정해야됨
+exports.logout = async (req, res, next) => {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+        return res.status(400).send('Refresh token이 필요합니다.');
+    }
+
+    try {
+        // Refresh Token 삭제
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+        const student_id = decoded.student_id;
+
+        await redisClient.del(`refreshToken:${student_id}`);
         res.status(200).send('로그아웃 성공');
-    })
-}
+    } catch (error) {
+        console.error(error);
+        res.status(400).send('로그아웃 실패');
+    }
+};
+
+
+// Refresh Token으로 Access Token 갱신, chatgpt라 수정해야함.
+exports.refreshToken = async (req, res, next) => {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+        return res.status(400).send('Refresh token이 필요합니다.');
+    }
+
+    try {
+        // Refresh Token 검증
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+        const student_id = decoded.student_id;
+
+        // 저장된 Refresh Token 확인
+        const storedToken = await redisClient.get(`refreshToken:${student_id}`);
+        if (storedToken !== refreshToken) {
+            return res.status(401).send('유효하지 않은 Refresh Token입니다.');
+        }
+
+        // 새로운 Access Token 발급
+        const newAccessToken = jwt.sign({ student_id }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+        return res.status(200).json({ accessToken: newAccessToken });
+    } catch (error) {
+        console.error(error);
+        res.status(401).send('Refresh Token 검증 실패');
+    }
+};
