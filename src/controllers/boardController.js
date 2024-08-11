@@ -1,4 +1,5 @@
 const boardService = require('../services/boardService');
+const topService = require('../services/topFivePostService');
 
 const createPost = async (boardModel, req, res) => {
     try {
@@ -57,10 +58,31 @@ const deletePost = async (boardModel, req, res) => {
     }
 };
 
+const topFivePostsFromAll = async function showTopPostsFromAllBoards() {
+    try {
+        const topPosts = await topService.getTop5PostsFromAllBoards();
+
+        console.log('Top 5 posts from all boards:', topPosts);
+    } catch (error) {
+        console.error('Error displaying top posts from all boards:', error);
+    }
+}
+
+const topFivePostsFromEach = async function showTopPostsFromEachBoard() {
+    try {
+        const topPosts = await topService.getTop5PostsEachBoard();
+
+        console.log('Top 5 posts from each board:', topPosts);
+    } catch (error) {
+        console.error('Error displaying top posts from each boards:', error);
+    }
+}
+
 module.exports = {
     createPost,
     getAllPosts,
     getPostById,
     updatePost,
     deletePost,
+    topFivePostsFromAll,
 };

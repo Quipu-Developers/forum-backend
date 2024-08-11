@@ -1,26 +1,26 @@
-const freeBoardCommentController = require('../services/freeBoardCommentService');
+const boardCommentService = require('../services/boardCommentService');
 
-const createComment = async (req, res) => {
+const createComment = async (commentModel, req, res) => {
     try {
-        const comment = await freeBoardCommentController.createComment(req.body);
+        const comment = await boardCommentService.createComment(commentModel, req.body);
         res.status(201).json(comment);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-const getAllComments = async (req, res) => {
+const getAllComments = async (commentModel, req, res) => {
     try {
-        const comments = await freeBoardCommentController.getAllComments();
+        const comments = await boardCommentService.getAllComments(commentModel);
         res.status(200).json(comments);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-const getCommentById = async (req, res) => {
+const getCommentById = async (commentModel, req, res) => {
     try {
-        const comment = await freeBoardCommentController.getCommentById(req.params.id);
+        const comment = await boardCommentService.getCommentById(commentModel, req.params.id);
         if (comment) {
             res.status(200).json(comment);
         } else {
@@ -31,9 +31,9 @@ const getCommentById = async (req, res) => {
     }
 };
 
-const updateComment = async (req, res) => {
+const updateComment = async (commentModel, req, res) => {
     try {
-        const updated = await freeBoardCommentController.updateComment(req.params.id, req.body);
+        const updated = await boardCommentService.updateComment(commentModel, req.params.id, req.body);
         if (updated[0] === 1) {
             res.status(200).json({ message: 'Comment updated successfully' });
         } else {
@@ -44,9 +44,9 @@ const updateComment = async (req, res) => {
     }
 };
 
-const deleteComment = async (req, res) => {
+const deleteComment = async (commentModel, req, res) => {
     try {
-        const deleted = await freeBoardCommentController.deleteComment(req.params.id);
+        const deleted = await boardCommentService.deleteComment(commentModel, req.params.id);
         if (deleted) {
             res.status(200).json({ message: 'Comment deleted successfully' });
         } else {
@@ -57,9 +57,9 @@ const deleteComment = async (req, res) => {
     }
 };
 
-const getNestedCommentById = async (req, res) => {
+const getNestedCommentById = async (commentModel, req, res) => {
     try {
-        const nestedComments = await freeBoardCommentController.getNestedCommentById(req.params.parentCommentId);
+        const nestedComments = await boardCommentService.getNestedCommentById(commentModel, req.params.parentCommentId);
         res.status(200).json(nestedComments);
     } catch (error) {
         res.status(500).json({ error: error.message });
