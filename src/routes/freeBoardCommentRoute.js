@@ -1,5 +1,6 @@
 const express = require('express');
-const freeBoardCommentController = require('../controllers/freeBoardCommentController');
+const boardCommentController = require('../controllers/boardCommentController');
+const freeBoardComment = require('../models/forumModels/free_board_comment');
 
 const router = express.Router();
 
@@ -58,7 +59,7 @@ const router = express.Router();
  *       500:
  *         description: Some server error
  */
-router.post('/free/comments', freeBoardCommentController.createComment);
+router.post('/free/comments', (req, res) => boardCommentController.createComment(freeBoardComment, req, res));
 
 /**
  * @swagger
@@ -78,7 +79,7 @@ router.post('/free/comments', freeBoardCommentController.createComment);
  *       500:
  *         description: Some server error
  */
-router.get('/free/comments', freeBoardCommentController.getAllComments);
+router.get('/free/comments', (req, res) => boardCommentController.getAllComments(freeBoardComment, req, res));
 
 /**
  * @swagger
@@ -105,7 +106,7 @@ router.get('/free/comments', freeBoardCommentController.getAllComments);
  *       500:
  *         description: Some server error
  */
-router.get('/free/comments/:id', freeBoardCommentController.getCommentById);
+router.get('/free/comments/:id', (req, res) => boardCommentController.getCommentById(freeBoardComment, req, res));
 
 /**
  * @swagger
@@ -148,7 +149,7 @@ router.get('/free/comments/:id', freeBoardCommentController.getCommentById);
  *       500:
  *         description: Some server error
  */
-router.put('/free/comments/:id', freeBoardCommentController.updateComment);
+router.put('/free/comments/:id', (req, res) => boardCommentController.updateComment(freeBoardComment, req, res));
 
 /**
  * @swagger
@@ -171,8 +172,7 @@ router.put('/free/comments/:id', freeBoardCommentController.updateComment);
  *       500:
  *         description: Some server error
  */
-router.delete('/free/comments/:id', freeBoardCommentController.deleteComment);
-
+router.delete('/free/comments/:id', (req, res) => boardCommentController.deleteComment(freeBoardComment, req, res));
 /**
  * @swagger
  * /board/free/comments/nested/{parentCommentId}:
@@ -198,6 +198,5 @@ router.delete('/free/comments/:id', freeBoardCommentController.deleteComment);
  *       500:
  *         description: Some server error
  */
-router.get('/free/comments/nested/:parentCommentId', freeBoardCommentController.getNestedCommentById);
-
+router.get('/free/comments/nested/:parentCommentId',  (req, res) => boardCommentController.getNestedCommentById(freeBoardComment, req, res));
 module.exports = router;
