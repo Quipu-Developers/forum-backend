@@ -30,8 +30,8 @@ class Board extends Sequelize.Model {
             },
             {
                 sequelize,
-                modelName: "Post",
-                tableName: "posts",
+                modelName: "Boards",
+                tableName: "boards",
                 underscored: true,
                 timestamps: true,
                 paranoid: true,
@@ -40,11 +40,6 @@ class Board extends Sequelize.Model {
             }
         );
     }
-
-    static associate(db) {
-        db.Board.belongsTo(db.User, { foreignKey: 'user_id', as: 'User' });
-        db.Board.hasMany(db.Comment, { foreignKey: 'post_id', as: 'Comments' });
-    }
 }
 
-module.exports = Post;
+module.exports = Board;

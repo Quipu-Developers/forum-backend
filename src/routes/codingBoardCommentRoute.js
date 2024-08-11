@@ -1,5 +1,6 @@
 const express = require('express');
-const codingBoardCommentController = require('../controllers/codingBoardCommentController');
+const boardCommentController = require('../controllers/boardCommentController');
+const codingBoardComment = require('../models/forumModels/coding_board_comment');
 
 const router = express.Router();
 
@@ -58,7 +59,7 @@ const router = express.Router();
  *       500:
  *         description: Some server error
  */
-router.post('/coding/comments', codingBoardCommentController.createComment);
+router.post('/coding/comments', (req, res) => boardCommentController.createComment(codingBoardComment, req, res));
 
 /**
  * @swagger
@@ -78,7 +79,7 @@ router.post('/coding/comments', codingBoardCommentController.createComment);
  *       500:
  *         description: Some server error
  */
-router.get('/coding/comments', codingBoardCommentController.getAllComments);
+router.get('/coding/comments', (req, res) => boardCommentController.getAllComments(codingBoardComment, req, res));
 
 /**
  * @swagger
@@ -105,7 +106,7 @@ router.get('/coding/comments', codingBoardCommentController.getAllComments);
  *       500:
  *         description: Some server error
  */
-router.get('/coding/comments/:id', codingBoardCommentController.getCommentById);
+router.get('/coding/comments/:id', (req, res) => boardCommentController.getCommentById(codingBoardComment, req, res));
 
 /**
  * @swagger
@@ -148,7 +149,7 @@ router.get('/coding/comments/:id', codingBoardCommentController.getCommentById);
  *       500:
  *         description: Some server error
  */
-router.put('/coding/comments/:id', codingBoardCommentController.updateComment);
+router.put('/coding/comments/:id', (req, res) => boardCommentController.updateComment(codingBoardComment, req, res));
 
 /**
  * @swagger
@@ -171,7 +172,7 @@ router.put('/coding/comments/:id', codingBoardCommentController.updateComment);
  *       500:
  *         description: Some server error
  */
-router.delete('/coding/comments/:id', codingBoardCommentController.deleteComment);
+router.delete('/coding/comments/:id', (req, res) => boardCommentController.deleteComment(codingBoardComment, req, res));
 
 /**
  * @swagger
@@ -198,6 +199,6 @@ router.delete('/coding/comments/:id', codingBoardCommentController.deleteComment
  *       500:
  *         description: Some server error
  */
-router.get('/coding/comments/nested/:parentCommentId', codingBoardCommentController.getNestedCommentById);
+router.get('/coding/comments/nested/:parentCommentId', (req, res) => boardCommentController.getNestedCommentById(codingBoardComment, req, res));
 
 module.exports = router;

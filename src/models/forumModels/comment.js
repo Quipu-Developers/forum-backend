@@ -44,11 +44,6 @@ class Comment extends Sequelize.Model {
             }
         );
     }
-
-    static associate(db) {
-        db.Comment.belongsTo(db.User, { foreignKey: 'user_id', as: 'User' });
-        db.Comment.belongsTo(db.Post, { foreignKey: 'post_id', as: 'Post' });
-    }
 }
 
 module.exports = Comment;

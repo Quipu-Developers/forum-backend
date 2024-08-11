@@ -1,8 +1,6 @@
 const express = require('express');
-const codingBoardController = require('../controllers/codingBoardController');
 const codingBoard = require('../models/forumModels/coding_board')
 const boardController = require("../controllers/boardController");
-const freeBoard = require("../models/forumModels/free_board");
 const router = express.Router();
 
 /**
@@ -56,7 +54,7 @@ const router = express.Router();
  *       500:
  *         description: Some server error
  */
-router.post('/free/posts', (req,res) => boardController.createPost(codingBoard,req,res));
+router.post('/coding/posts', (req,res) => boardController.createPost(codingBoard,req,res));
 
 /**
  * @swagger
