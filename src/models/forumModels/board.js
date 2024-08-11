@@ -1,9 +1,9 @@
 const { DataTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 
-class Post extends Sequelize.Model {
+class Board extends Sequelize.Model {
     static initiate(sequelize) {
-        Post.init(
+        Board.init(
             {
                 post_id: {
                     type: DataTypes.INTEGER,
@@ -42,8 +42,8 @@ class Post extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Post.belongsTo(db.User, { foreignKey: 'user_id', as: 'User' });
-        db.Post.hasMany(db.Comment, { foreignKey: 'post_id', as: 'Comments' });
+        db.Board.belongsTo(db.User, { foreignKey: 'user_id', as: 'User' });
+        db.Board.hasMany(db.Comment, { foreignKey: 'post_id', as: 'Comments' });
     }
 }
 

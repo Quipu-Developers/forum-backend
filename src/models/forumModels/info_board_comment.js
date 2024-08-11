@@ -1,4 +1,4 @@
-const Comment = require('./Comment');
+const Comment = require('./comment');
 
 class InfoBoardComment extends Comment {
     static initiate(sequelize) {
