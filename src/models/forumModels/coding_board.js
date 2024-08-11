@@ -1,6 +1,6 @@
-const Post = require('./Post');
+const Board = require('./board');
 
-class CodingBoard extends Post {
+class CodingBoard extends Board {
     static initiate(sequelize) {
         super.initiate(sequelize);
         CodingBoard.init(
