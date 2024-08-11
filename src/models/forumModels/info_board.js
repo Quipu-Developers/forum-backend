@@ -1,46 +1,17 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const Post = require('./Post');
 
-class Info_board extends Sequelize.Model {
+class InfoBoard extends Post {
     static initiate(sequelize) {
-        Info_board.init(
-            {
-                post_id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true,
-                    allowNull: false,
-                },
-                user_name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                title: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                content: {
-                    type: DataTypes.JSON,
-                    allowNull: false,
-                },
-            },
+        super.initiate(sequelize);  // 부모 클래스(Post)의 initiate 메서드 호출
+        InfoBoard.init(
+            {},
             {
                 sequelize,
-                modelName: "Info_board",
-                tableName: "info_boards",
-                underscored: true,
-                timestamps: true,
-                paranoid: true,
-                charset: "utf8mb4",
-                collate: "utf8mb4_general_ci",
+                modelName: 'InfoBoard',
+                tableName: 'info_boards',
             }
         );
     }
-
-    static associate(db) {
-        db.Info_board.belongsTo(db.User);
-        db.Info_board.hasMany(db.Info_board_comment);
-    }
 }
 
-module.exports = Info_board;
+module.exports = InfoBoard;
