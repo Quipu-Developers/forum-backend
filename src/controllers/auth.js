@@ -54,7 +54,7 @@ exports.login = (req, res, next) => {
         try {
             const payload = { student_id: user.student_id };
             const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '1h' }); // accessToken 발급
-            const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, { expiresIn: '7d' }); // refreshToken 발급
+            const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, { expiresIn: '1d' }); // refreshToken 발급
             const existingToken = await redisClient.get(`refreshToken:${user.student_id}`);
             if (existingToken) {
                 await redisClient.del(`refreshToken:${user.student_id}`);
