@@ -24,6 +24,7 @@
       "post": {
         "summary": "회원 가입",
         "description": "forum에 회원가입",
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
