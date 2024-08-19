@@ -1,6 +1,6 @@
 const express = require('express');
-const codingBoardController = require('../controllers/codingBoardController');
-
+const codingBoard = require('../models/forumModels/coding_board')
+const boardController = require("../controllers/boardController");
 const router = express.Router();
 
 /**
@@ -54,7 +54,7 @@ const router = express.Router();
  *       500:
  *         description: Some server error
  */
-router.post('/coding/posts', codingBoardController.createPost);
+router.post('/coding/posts', (req,res) => boardController.createPost(codingBoard,req,res));
 
 /**
  * @swagger
@@ -74,7 +74,7 @@ router.post('/coding/posts', codingBoardController.createPost);
  *       500:
  *         description: Some server error
  */
-router.get('/coding/posts', codingBoardController.getAllPosts);
+router.get('/coding/posts', (req,res) => boardController.getAllPosts(codingBoard,req,res));
 
 /**
  * @swagger
@@ -101,7 +101,7 @@ router.get('/coding/posts', codingBoardController.getAllPosts);
  *       500:
  *         description: Some server error
  */
-router.get('/coding/posts/:id', codingBoardController.getPostById);
+router.get('/coding/posts/:id',  (req,res) => boardController.getPostById(codingBoard,req,res));
 
 /**
  * @swagger
@@ -144,7 +144,7 @@ router.get('/coding/posts/:id', codingBoardController.getPostById);
  *       500:
  *         description: Some server error
  */
-router.put('/coding/posts/:id', codingBoardController.updatePost);
+router.put('/coding/posts/:id', (req,res) => boardController.updatePost(codingBoard,req,res));
 
 /**
  * @swagger
@@ -167,6 +167,6 @@ router.put('/coding/posts/:id', codingBoardController.updatePost);
  *       500:
  *         description: Some server error
  */
-router.delete('/coding/posts/:id', codingBoardController.deletePost);
+router.delete('/coding/posts/:id', (req,res) => boardController.deletePost(codingBoard,req,res));
 
 module.exports = router;
