@@ -1,46 +1,27 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const Comment = require('./comment');
 
-class Coding_board_comment extends Sequelize.Model {
+class CodingBoardComment extends Comment {
     static initiate(sequelize) {
-        Coding_board_comment.init(
+        super.initiate(sequelize);
+        CodingBoardComment.init(
             {
-                comment_id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true,
-                    allowNull: false,
-                },
-                parent_comment_id: {
-                    type: DataTypes.INTEGER,
-                    allowNull: true,
-                },
-                user_name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                comment: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
+                // 부모 클래스(Board)의 필드를 수동으로 정의
+                ...Comment.rawAttributes,
+                // 추가적인 필드가 있다면 여기서 추가
             },
             {
                 sequelize,
-                modelName: "Coding_board_comment",
-                tableName: "coding_board_comments",
-                underscored: true,
-                timestamps: true,
-                paranoid: true,
-                charset: "utf8mb4",
-                collate: "utf8mb4_general_ci",
+                modelName: 'CodingBoardComment',
+                tableName: 'coding_board_comments',
             }
         );
     }
 
     static associate(db) {
-        db.Coding_board_comment.belongsTo(db.User);
-        db.Coding_board_comment.belongsTo(db.Coding_board);
+        db.CodingBoardComment.belongsTo(db.User, { foreignKey: 'user_id' , targetKey : 'user_id'});
+        db.CodingBoardComment.belongsTo(db.CodingBoard, { foreignKey: 'post_id' ,targetKey : 'post_id'});
+        // post_id가 CodingBoardComment 의 필드로 존재하지 않는다는 오류 발생
     }
 }
 
-module.exports = Coding_board_comment;
+module.exports = CodingBoardComment;

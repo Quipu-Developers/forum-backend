@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "ejjem",
-    "password": "tigonlee10*",
-    "database": "joinquipu",
+    "username": "root",
+    "password": "20011211",
+    "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
