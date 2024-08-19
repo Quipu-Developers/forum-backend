@@ -1,46 +1,26 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const Comment = require('./comment');
 
-class Info_board_comment extends Sequelize.Model {
+class InfoBoardComment extends Comment {
     static initiate(sequelize) {
-        Info_board_comment.init(
+        super.initiate(sequelize);
+        InfoBoardComment.init(
             {
-                comment_id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true,
-                    allowNull: false,
-                },
-                parent_comment_id: {
-                    type: DataTypes.INTEGER,
-                    allowNull: true,
-                },
-                user_name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                comment: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
+                // 부모 클래스(Board)의 필드를 수동으로 정의
+                ...Comment.rawAttributes,
+                // 추가적인 필드가 있다면 여기서 추가
             },
             {
                 sequelize,
-                modelName: "Info_board_comment",
-                tableName: "info_board_comments",
-                underscored: true,
-                timestamps: true,
-                paranoid: true,
-                charset: "utf8mb4",
-                collate: "utf8mb4_general_ci",
+                modelName: 'InfoBoardComment',
+                tableName: 'info_board_comments',
             }
         );
     }
 
     static associate(db) {
-        db.Info_board_comment.belongsTo(db.User);
-        db.Info_board_comment.belongsTo(db.Info_board);
+        db.InfoBoardComment.belongsTo(db.User, {foreignKey : 'user_id', targetKey : 'user_id'});
+        db.InfoBoardComment.belongsTo(db.InfoBoard, {foreignKey : 'post_id', targetKey : 'post_id'});
     }
 }
 
-module.exports = Info_board_comment;
+module.exports = InfoBoardComment;

@@ -1,46 +1,25 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const Board = require('./board');
 
-class Coding_board extends Sequelize.Model {
+class CodingBoard extends Board {
     static initiate(sequelize) {
-        Coding_board.init(
+        CodingBoard.init(
             {
-                post_id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true,
-                    allowNull: false,
-                },
-                user_name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                title: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                content: {
-                    type: DataTypes.JSON,
-                    allowNull: false,
-                },
+                // 부모 클래스(Board)의 필드를 수동으로 정의
+                ...Board.rawAttributes,
+                // 추가적인 필드가 있다면 여기서 추가
             },
             {
                 sequelize,
-                modelName: "Coding_board",
-                tableName: "coding_boards",
-                underscored: true,
-                timestamps: true,
-                paranoid: true,
-                charset: "utf8mb4",
-                collate: "utf8mb4_general_ci",
+                modelName: 'CodingBoard',
+                tableName: 'coding_boards',
             }
         );
     }
 
     static associate(db) {
-        db.Coding_board.belongsTo(db.User);
-        db.Coding_board.hasMany(db.Coding_board_comment);
+        db.CodingBoard.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
+        db.CodingBoard.hasMany(db.CodingBoardComment, { foreignKey: 'post_id', sourceKey: 'post_id' });
     }
 }
 
-module.exports = Coding_board;
+module.exports = CodingBoard;
