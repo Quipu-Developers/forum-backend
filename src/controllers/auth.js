@@ -80,7 +80,7 @@ exports.login = (req, res, next) => {
     })(req, res, next);
 };
 
-//로그아웃, chatgpt라 수정해야됨
+//로그아웃
 exports.logout = async (req, res, next) => {
     const { refreshToken } = req.body;
     if (!refreshToken) {
@@ -101,7 +101,7 @@ exports.logout = async (req, res, next) => {
 };
 
 
-// Refresh Token으로 Access Token 갱신, chatgpt라 수정해야함.
+// Refresh Token으로 Access Token 갱신
 exports.refreshToken = async (req, res, next) => {
     const { refreshToken } = req.body;
     if (!refreshToken) {
