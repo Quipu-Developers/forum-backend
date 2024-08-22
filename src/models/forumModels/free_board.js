@@ -20,6 +20,7 @@ class FreeBoard extends Board {
     static associate(db) {
         db.FreeBoard.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
         db.FreeBoard.hasMany(db.FreeBoardComment, { foreignKey: 'post_id', sourceKey: 'post_id' });
+        db.FreeBoard.hasMany(db.FreeBoardFile);
     }
 }
 
