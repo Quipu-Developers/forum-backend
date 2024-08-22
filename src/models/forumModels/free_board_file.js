@@ -1,33 +1,29 @@
 const { DataTypes } = require("sequelize");
 const Sequelize = require('sequelize');
 
-class Coding_board extends Sequelize.Model {
+class Free_board_file extends Sequelize.Model {
     static initiate(sequelize) {
-        Coding_board.init(
+        Free_board_file.init(
             {
-                post_id: {
+                file_id: {
                     type: DataTypes.INTEGER,
                     primaryKey: true,
                     autoIncrement: true,
                     allowNull: false,
                 },
-                user_name: {
+                file_name: {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                title: {
+                file_path: {
                     type: DataTypes.STRING,
                     allowNull: false,
-                },
-                content: {
-                    type: DataTypes.JSON,
-                    allowNull: false,
-                },
+                }
             },
             {
                 sequelize,
-                modelName: "Coding_board",
-                tableName: "coding_boards",
+                modelName: "Free_board_file",
+                tableName: "free_board_files",
                 underscored: true,
                 timestamps: true,
                 paranoid: true,
@@ -38,10 +34,8 @@ class Coding_board extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Coding_board.belongsTo(db.User);
-        db.Coding_board.hasMany(db.Coding_board_comment);
-        db.Coding_board.hasMany(db.Coding_board_file);
+        db.Free_board_file.belongsTo(db.Free_board);
     }
 }
 
-module.exports = Coding_board;
+module.exports = Free_board_file;

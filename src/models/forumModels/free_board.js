@@ -39,7 +39,8 @@ class Free_board extends Sequelize.Model {
 
     static associate(db) {
         db.Free_board.belongsTo(db.User);
-        db.Free_board.hasMany(db.Free_board_comment)
+        db.Free_board.hasMany(db.Free_board_comment);
+        db.Free_board.hasMany(db.Free_board_file);
     }
 }
 

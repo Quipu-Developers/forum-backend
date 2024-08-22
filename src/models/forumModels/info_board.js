@@ -40,6 +40,7 @@ class Info_board extends Sequelize.Model {
     static associate(db) {
         db.Info_board.belongsTo(db.User);
         db.Info_board.hasMany(db.Info_board_comment);
+        db.Info_board.hasMany(db.Info_board_file);
     }
 }
 
