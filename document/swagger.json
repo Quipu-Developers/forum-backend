@@ -1,0 +1,397 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "forum API",
+    "version": "0.0.1",
+    "description": "quipu forum API용 Swagger"
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/auth/join": {
+      "post": {
+        "summary": "회원 가입",
+        "description": "forum에 회원가입",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "student_id": {
+                    "type": "string",
+                    "description": "회원가입 희망자의 학번",
+                    "example": "2020440102"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "회원가입 희망자의 이메일",
+                    "example": "example@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "생성 계정의 비밀번호",
+                    "example": "quipu1234"
+                  }
+                },
+                "required": ["student_id", "email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "회원 가입 완료",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "회원 가입 결과 메시지",
+                      "example": "회원 가입 완료"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "회원가입 실패 - 이미 회원가입된 경우 또는 퀴푸 동아리원이 아닌 경우",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "실패 이유",
+                      "example": "퀴푸 동아리원이 아닙니다"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "서버 에러 메시지",
+                      "example": "서버 에러"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "로그인",
+        "description": "forum 회원의 계정 로그인",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "student_id": {
+                    "type": "string",
+                    "description": "학번이자 forum의 id",
+                    "example": "2020440102"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "계정의 비밀번호",
+                    "example": "quipu1234"
+                  }
+                },
+                "required": ["student_id", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "로그인 성공, 토큰 반환",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "description": "Access Token"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "description": "Refresh Token"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "로그인 성공 메시지",
+                      "example": "로그인 성공"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "사용자 이름",
+                          "example": "John Doe"
+                        },
+                        "student_id": {
+                          "type": "string",
+                          "description": "학번",
+                          "example": "2020440102"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "이메일",
+                          "example": "example@gmail.com"
+                        },
+                        "major": {
+                          "type": "string",
+                          "description": "전공",
+                          "example": "Computer Science"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "회원이 아님 or 비밀번호가 틀림. 정보는 message로 갈 것",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "로그인 실패 메시지",
+                      "example": "회원 정보가 올바르지 않습니다"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "서버 에러 메시지",
+                      "example": "서버 에러"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "로그아웃",
+        "description": "사용자 로그아웃을 처리합니다. 요청 본문에서 refreshToken을 받아 삭제합니다. 반드시 우측 상단 위 authorize에 로그인 시 발급 받은 accessToken을 적어주세요.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "description": "사용자의 Refresh Token",
+                    "example": "login 하고 얻은 Refresh Token을 복붙해주세요"
+                  }
+                },
+                "required": ["refreshToken"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "로그아웃 성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "로그아웃 성공 메시지",
+                      "example": "로그아웃 성공"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Refresh Token이 제공되지 않거나 오류 발생",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "오류 메시지",
+                      "example": "Refresh token이 필요합니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "서버 에러 메시지",
+                      "example": "서버 에러"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refreshToken": {
+      "post": {
+        "summary": "Access Token 갱신",
+        "description": "Refresh Token을 사용하여 새로운 Access Token을 발급합니다. 반드시 우측 상단 위 authorize에 로그인 시 발급 받은 accessToken을 적어주세요.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "description": "사용자의 Refresh Token",
+                    "example": "login 하고 얻은 Refresh Token을 복붙해주세요"
+                  }
+                },
+                "required": ["refreshToken"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access Token 갱신 성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "description": "새로운 Access Token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Refresh Token이 제공되지 않거나 오류 발생",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "오류 메시지",
+                      "example": "Refresh token이 필요합니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "유효하지 않은 Refresh Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "오류 메시지",
+                      "example": "유효하지 않은 Refresh Token입니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "서버 에러 메시지",
+                      "example": "서버 에러"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

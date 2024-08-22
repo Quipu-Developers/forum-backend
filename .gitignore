@@ -1,5 +1,5 @@
 config/*.json
-config.json
+config.jsone
 src/config/config.json
 src/config/*.json
 src/initialize.js

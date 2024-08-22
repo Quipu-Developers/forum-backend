@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const path = require("path");
 const session = require("express-session");
 const dotenv = require("dotenv");
+const passport = require("passport");
+const redisClient = require("./config/redisClient");
 const PORT = process.env.PORT || 3001;
 const bodyParser = require('body-parser');
 const initialize = require('./initialize');
@@ -19,11 +21,16 @@ const boardRoute = require('./routes/boardRoute');
 const { swaggerUi, specs } = require('./swagger');
 
 dotenv.config(); //process.env
+
 const { forumSequelize, joinquipuSequelize } = require("./models");
+const passportConfig = require("./passport");
+passportConfig();
+const authRouter = require('./routes/auth');
 
 const cors = require('cors');
 
 const app = express();
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,6 +49,17 @@ app.use('/board', freeBoardCommentRoute);
 app.use('/board', boardRoute);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+        httpOnly: true,
+        secure: false, //개발 시에만 false로(http, https 모두 가능)
+    }
+}));
+app.use(passport.initialize()); // req.user, req.login, req.isAuthenticate, req.logout
+app.use(passport.session()); //connect.id라는 이름으로 세션 쿠키가 브라우져로 전송
 
 
 async function DBConnections() {
@@ -60,6 +78,11 @@ async function DBConnections() {
         await joinquipuSequelize.sync();
         console.log("joinquipu 스키마 DB 동기화");
 
+        //redis 연결
+        await redisClient.connect().catch(console.error);
+        await redisClient.select(0);
+        console.log("redis 연결, DB index: 0");
+
         // 서버 시작
         app.listen(PORT, () => {
             console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
@@ -70,3 +93,17 @@ async function DBConnections() {
 }
 
 DBConnections();
+
+
+
+app.use('/auth', authRouter);
+app.use((err, req, res, next) => {
+    console.error(err.stack || err);
+    res.status(500).json({
+        error: {
+            message: 'Internet Server Error'
+        }
+    })
+});
+
+
