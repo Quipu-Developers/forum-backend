@@ -1,4 +1,4 @@
-const Comment = require('../../../../../../Downloads/comment');
+const Comment = require('./comment');
 
 class FreeBoardComment extends Comment {
     static initiate(sequelize) {

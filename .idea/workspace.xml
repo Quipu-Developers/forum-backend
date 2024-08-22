@@ -5,59 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35ea9069-7531-4204-aa85-eb46a0a2a737" name="Changes" comment="Fix: 모델들 오류 수정">
-      <change afterPath="$PROJECT_DIR$/src/models/forumModels/coding_board.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/forumModels/coding_board_comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/forumModels/free_board.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/forumModels/free_board_comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/forumModels/info_board.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/forumModels/info_board_comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/forumModels/info_board_file.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/joinquipuModels/dev_member.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/dist/config/Configuration.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/dist/config/Configuration.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mariadb/lib/config/cluster-options.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mariadb/lib/config/connection-options.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mariadb/lib/config/pool-options.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/command.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/defaults.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/exec.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/load.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/coding_board.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/free_board_file.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/coding_board_comment.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/dev_member.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/free_board.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/board.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/free_board_comment.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/gallery.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/gallery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/general_member.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/joinquipuModels/general_member.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/info_board.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/coding_board_file.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/info_board_comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,10 +29,11 @@
     "Node.js.codingBoardController.js.executor": "Run",
     "Node.js.infoBoardRoute.js.executor": "Run",
     "Node.js.infoBoardService.js.executor": "Run",
+    "Node.js.info_board.js.executor": "Run",
     "Node.js.info_board_comment.js.executor": "Run",
     "Node.js.swagger.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging feature/db",
+    "git-widget-placeholder": "feature/db",
     "last_opened_file_path": "/Users/Ruffles/Projects/Forum_BE/forum-backend/src/controllers",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -100,6 +49,7 @@
       <recent name="$PROJECT_DIR$/src/controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/models/forumModels" />
       <recent name="$PROJECT_DIR$/src/services" />
       <recent name="$PROJECT_DIR$/src/services/board" />
       <recent name="$PROJECT_DIR$/src" />
@@ -134,7 +84,7 @@
       <workItem from="1724067956900" duration="3313000" />
       <workItem from="1724076151981" duration="4225000" />
       <workItem from="1724325309415" duration="3114000" />
-      <workItem from="1724333171815" duration="301000" />
+      <workItem from="1724333171815" duration="606000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: 모델 수정">
       <option name="closed" value="true" />
