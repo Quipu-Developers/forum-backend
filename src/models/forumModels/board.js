@@ -1,14 +1,18 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 
-class Coding_board extends Sequelize.Model {
+class Board extends Sequelize.Model {
     static initiate(sequelize) {
-        Coding_board.init(
+        Board.init(
             {
                 post_id: {
                     type: DataTypes.INTEGER,
                     primaryKey: true,
                     autoIncrement: true,
+                    allowNull: false,
+                },
+                user_id: {
+                    type: DataTypes.INTEGER,
                     allowNull: false,
                 },
                 user_name: {
@@ -26,8 +30,8 @@ class Coding_board extends Sequelize.Model {
             },
             {
                 sequelize,
-                modelName: "Coding_board",
-                tableName: "coding_boards",
+                modelName: "Boards",
+                tableName: "boards",
                 underscored: true,
                 timestamps: true,
                 paranoid: true,
@@ -36,11 +40,6 @@ class Coding_board extends Sequelize.Model {
             }
         );
     }
-
-    static associate(db) {
-        db.Coding_board.belongsTo(db.User);
-        db.Coding_board.hasMany(db.Coding_board_comment);
-    }
 }
 
-module.exports = Coding_board;
+module.exports = Board;

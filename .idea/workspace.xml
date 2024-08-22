@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="35ea9069-7531-4204-aa85-eb46a0a2a737" name="Changes" comment="Fix: 모델들 오류 수정">
+      <change afterPath="$PROJECT_DIR$/src/models/forumModels/coding_board.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/forumModels/coding_board_comment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/forumModels/free_board.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/forumModels/free_board_comment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/forumModels/info_board.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/forumModels/info_board_comment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/forumModels/info_board_file.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/joinquipuModels/dev_member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/dist/config/Configuration.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-browser/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/dist/config/Configuration.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/dist/config/Configuration.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/AppTokenProvider.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@azure/msal-node/node_modules/@azure/msal-common/dist/config/ClientConfiguration.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mariadb/lib/config/cluster-options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mariadb/lib/config/connection-options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mariadb/lib/config/pool-options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/command.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/defaults.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/exec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/lib/config/load.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/coding_board.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/free_board_file.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/coding_board_comment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/dev_member.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/free_board.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/board.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/free_board_comment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/gallery.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/gallery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/general_member.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/joinquipuModels/general_member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/info_board.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/coding_board_file.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/info_board_comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/forumModels/user.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2jxoZEFl4cDt6rz5aC8GzWErQv8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.app.js.executor": "Run",
+    "Node.js.codingBoardController.js.executor": "Run",
+    "Node.js.infoBoardRoute.js.executor": "Run",
+    "Node.js.infoBoardService.js.executor": "Run",
+    "Node.js.info_board_comment.js.executor": "Run",
+    "Node.js.swagger.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging feature/db",
+    "last_opened_file_path": "/Users/Ruffles/Projects/Forum_BE/forum-backend/src/controllers",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/controllers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/services" />
+      <recent name="$PROJECT_DIR$/src/services/board" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/routes" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="35ea9069-7531-4204-aa85-eb46a0a2a737" name="Changes" comment="" />
+      <created>1722338142226</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722338142226</updated>
+      <workItem from="1722338143291" duration="5566000" />
+      <workItem from="1722405632996" duration="266000" />
+      <workItem from="1722405919068" duration="612000" />
+      <workItem from="1722554380465" duration="125000" />
+      <workItem from="1722765540586" duration="20593000" />
+      <workItem from="1722923389791" duration="6899000" />
+      <workItem from="1723346838367" duration="11499000" />
+      <workItem from="1723444049590" duration="2372000" />
+      <workItem from="1723446730237" duration="2251000" />
+      <workItem from="1723899966490" duration="3984000" />
+      <workItem from="1724067956900" duration="3313000" />
+      <workItem from="1724076151981" duration="4225000" />
+      <workItem from="1724325309415" duration="3114000" />
+      <workItem from="1724333171815" duration="301000" />
+    </task>
+    <task id="LOCAL-00001" summary="Feat: 모델 수정">
+      <option name="closed" value="true" />
+      <created>1723352679795</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1723352679795</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Feat: Service 추상화">
+      <option name="closed" value="true" />
+      <created>1723352704479</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723352704479</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Feat: Board, Comment 모델 추상화">
+      <option name="closed" value="true" />
+      <created>1723352966961</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723352966961</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Feat: Board route, service, controller 수정">
+      <option name="closed" value="true" />
+      <created>1723353693085</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723353693085</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fix: 모델들 오류 수정">
+      <option name="closed" value="true" />
+      <created>1723390152333</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723390152333</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Feat: 모델 수정" />
+    <MESSAGE value="Feat: Service 추상화" />
+    <MESSAGE value="Feat: Board, Comment 모델 추상화" />
+    <MESSAGE value="Feat: Board route, service, controller 수정" />
+    <MESSAGE value="Fix: 모델들 오류 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: 모델들 오류 수정" />
+  </component>
+</project>
