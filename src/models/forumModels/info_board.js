@@ -20,7 +20,7 @@ class InfoBoard extends Board {
     static associate(db) {
         db.InfoBoard.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
         db.InfoBoard.hasMany(db.InfoBoardComment, { foreignKey: 'post_id', sourceKey: 'post_id' });
-        db.FreeBoard.hasMany(db.InfoBoardFile);
+        db.InfoBoard.hasMany(db.InfoBoardFile);
     }
 }
 
