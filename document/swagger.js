@@ -11,7 +11,6 @@ dotenv.config({path: '../src/.env'}); //process.env
 const { forumSequelize, joinquipuSequelize } = require("../src/models");
 const passportConfig = require("../src/passport");
 passportConfig({path: '../src.env'});
-const authRouter = require('../src/routes/auth');
 const app = express();
 // Swagger 관련 추가
 const swaggerUi = require('swagger-ui-express');
@@ -33,6 +32,14 @@ app.use(session({
 app.use(passport.initialize()); // req.user, req.login, req.isAuthenticate, req.logout
 app.use(passport.session()); //connect.id라는 이름으로 세션 쿠키가 브라우져로 전송
 
+const freeBoardRoute = require('../src/routes/freeBoardRoute');
+const infoBoardRoute = require('../src/routes/infoBoardRoute');
+const codingBoardRoute = require('../src/routes/codingBoardRoute');
+const infoBoardCommentRoute = require('../src/routes/infoBoardCommentRoute');
+const codingBoardCommentRoute = require('../src/routes/codingBoardCommentRoute');
+const freeBoardCommentRoute = require('../src/routes/freeBoardCommentRoute');
+const boardRoute = require('../src/routes/boardRoute');
+const authRouter = require('../src/routes/auth');
 
 async function DBConnections() {
     try {
@@ -63,6 +70,14 @@ async function DBConnections() {
 
 DBConnections();
 
+// 라우트 설정
+app.use('/board', freeBoardRoute);
+app.use('/board', infoBoardRoute);
+app.use('/board', codingBoardRoute);
+app.use('/board', infoBoardCommentRoute);
+app.use('/board', codingBoardCommentRoute);
+app.use('/board', freeBoardCommentRoute);
+app.use('/board', boardRoute);
 
 app.use('/auth', authRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

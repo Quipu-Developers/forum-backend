@@ -392,6 +392,1238 @@
           }
         }
       }
+    },
+    "/board/coding/posts": {
+      "post": {
+        "summary": "Create a new post",
+        "tags": ["CodingBoard"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "user_id",
+                  "user_name",
+                  "title",
+                  "content"
+                ],
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "description": "ID of the user"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "description": "Name of the user"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the post"
+                  },
+                  "content": {
+                    "type": "object",
+                    "description": "Content of the post"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The post was successfully created"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all the posts",
+        "tags": ["CodingBoard"],
+        "responses": {
+          "200": {
+            "description": "The list of the posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/coding/posts/{id}": {
+      "get": {
+        "summary": "Get a post by ID",
+        "tags": ["CodingBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The post description by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a post by ID",
+        "tags": ["CodingBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The post was updated successfully"
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a post by ID",
+        "tags": ["CodingBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The post was deleted successfully"
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/top5": {
+      "get": {
+        "summary": "모든 게시판에서 상위 5개의 게시글을 가져옵니다.",
+        "tags": ["Boards"],
+        "responses": {
+          "200": {
+            "description": "상위 5개의 게시글 리스트",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "게시글 ID"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "게시글 제목"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "게시글 내용"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "게시글 작성 날짜"
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "description": "작성자 ID"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/board/coding/comments": {
+      "post": {
+        "summary": "Create a new comment",
+        "tags": ["CodingBoardComment"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "user_name",
+                  "comment",
+                  "post_id",
+                  "user_id"
+                ],
+                "properties": {
+                  "parent_comment_id": {
+                    "type": "integer",
+                    "description": "ID of the parent comment"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "description": "Name of the user"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Content of the comment"
+                  },
+                  "post_id": {
+                    "type": "integer",
+                    "description": "ID of the post the comment is associated with"
+                  },
+                  "user_id": {
+                    "type": "integer",
+                    "description": "ID of the user making the comment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The comment was successfully created"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all the comments",
+        "tags": ["CodingBoardComment"],
+        "responses": {
+          "200": {
+            "description": "The list of the comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/coding/comments/{id}": {
+      "get": {
+        "summary": "Get a comment by ID",
+        "tags": ["CodingBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The comment description by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a comment by ID",
+        "tags": ["CodingBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "parent_comment_id": {
+                    "type": "integer"
+                  },
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The comment was updated successfully"
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a comment by ID",
+        "tags": ["CodingBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The comment was deleted successfully"
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/coding/comments/nested/{parentCommentId}": {
+      "get": {
+        "summary": "Get nested comments by parent comment ID",
+        "tags": ["CodingBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "parentCommentId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The parent comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of nested comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/free/posts": {
+      "post": {
+        "summary": "Create a new post",
+        "tags": ["FreeBoard"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "user_id",
+                  "user_name",
+                  "title",
+                  "content"
+                ],
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "description": "ID of the user"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "description": "Name of the user"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the post"
+                  },
+                  "content": {
+                    "type": "object",
+                    "description": "Content of the post"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The post was successfully created"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all the posts",
+        "tags": ["FreeBoard"],
+        "responses": {
+          "200": {
+            "description": "The list of the posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/free/posts/{id}": {
+      "get": {
+        "summary": "Get a post by ID",
+        "tags": ["FreeBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The post description by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a post by ID",
+        "tags": ["FreeBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The post was updated successfully"
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a post by ID",
+        "tags": ["FreeBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The post was deleted successfully"
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/free/comments": {
+      "post": {
+        "summary": "Create a new comment",
+        "tags": ["FreeBoardComment"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "user_name",
+                  "comment",
+                  "post_id",
+                  "user_id"
+                ],
+                "properties": {
+                  "parent_comment_id": {
+                    "type": "integer",
+                    "description": "ID of the parent comment"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "description": "Name of the user"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Content of the comment"
+                  },
+                  "post_id": {
+                    "type": "integer",
+                    "description": "ID of the post the comment is associated with"
+                  },
+                  "user_id": {
+                    "type": "integer",
+                    "description": "ID of the user making the comment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The comment was successfully created"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all the comments",
+        "tags": ["FreeBoardComment"],
+        "responses": {
+          "200": {
+            "description": "The list of the comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/free/comments/{id}": {
+      "get": {
+        "summary": "Get a comment by ID",
+        "tags": ["FreeBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The comment description by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a comment by ID",
+        "tags": ["FreeBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "parent_comment_id": {
+                    "type": "integer"
+                  },
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The comment was updated successfully"
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a comment by ID",
+        "tags": ["FreeBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The comment was deleted successfully"
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/free/comments/nested/{parentCommentId}": {
+      "get": {
+        "summary": "Get nested comments by parent comment ID",
+        "tags": ["FreeBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "parentCommentId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The parent comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of nested comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/info/posts": {
+      "post": {
+        "summary": "Create a new post",
+        "tags": ["InfoBoard"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "user_id",
+                  "user_name",
+                  "title",
+                  "content"
+                ],
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "description": "ID of the user"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "description": "Name of the user"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the post"
+                  },
+                  "content": {
+                    "type": "object",
+                    "description": "Content of the post"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The post was successfully created"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all the posts",
+        "tags": ["InfoBoard"],
+        "responses": {
+          "200": {
+            "description": "The list of the posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/info/posts/{id}": {
+      "get": {
+        "summary": "Get a post by ID",
+        "tags": ["InfoBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The post description by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a post by ID",
+        "tags": ["InfoBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The post was updated successfully"
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a post by ID",
+        "tags": ["InfoBoard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The post ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The post was deleted successfully"
+          },
+          "404": {
+            "description": "The post was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/info/comments": {
+      "post": {
+        "summary": "Create a new comment",
+        "tags": ["InfoBoardComment"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "user_name",
+                  "comment",
+                  "post_id",
+                  "user_id"
+                ],
+                "properties": {
+                  "parent_comment_id": {
+                    "type": "integer",
+                    "description": "ID of the parent comment"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "description": "Name of the user"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Content of the comment"
+                  },
+                  "post_id": {
+                    "type": "integer",
+                    "description": "ID of the post the comment is associated with"
+                  },
+                  "user_id": {
+                    "type": "integer",
+                    "description": "ID of the user making the comment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The comment was successfully created"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all the comments",
+        "tags": ["InfoBoardComment"],
+        "responses": {
+          "200": {
+            "description": "The list of the comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/info/comments/{id}": {
+      "get": {
+        "summary": "Get a comment by ID",
+        "tags": ["InfoBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The comment description by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a comment by ID",
+        "tags": ["InfoBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "parent_comment_id": {
+                    "type": "integer"
+                  },
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The comment was updated successfully"
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a comment by ID",
+        "tags": ["InfoBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The comment was deleted successfully"
+          },
+          "404": {
+            "description": "The comment was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/board/info/comments/nested/{parentCommentId}": {
+      "get": {
+        "summary": "Get nested comments by parent comment ID",
+        "tags": ["InfoBoardComment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "parentCommentId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The parent comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of nested comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
     }
   }
 }
