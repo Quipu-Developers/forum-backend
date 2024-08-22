@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 const PORT = process.env.PORT || 3001;
 const redisClient = require("../src/config/redisClient");
+const initialize = require('./initialize');
 dotenv.config({path: '../src/.env'}); //process.env
 const { forumSequelize, joinquipuSequelize } = require("../src/models");
 const passportConfig = require("../src/passport");
@@ -48,6 +49,8 @@ async function DBConnections() {
         console.log("forum 스키마 DB 연결");
         await forumSequelize.sync({});
         console.log("forum 스키마 DB 동기화");
+
+        await initialize();
 
         // joinquipu 스키마에 대한 인증 및 동기화
         await joinquipuSequelize.authenticate();

@@ -423,7 +423,7 @@
                     "description": "Title of the post"
                   },
                   "content": {
-                    "type": "object",
+                    "type": "string",
                     "description": "Content of the post"
                   }
                 }
