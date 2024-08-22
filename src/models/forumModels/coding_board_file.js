@@ -1,33 +1,29 @@
 const { DataTypes } = require("sequelize");
 const Sequelize = require('sequelize');
 
-class Info_board_comment extends Sequelize.Model {
+class Coding_board_file extends Sequelize.Model {
     static initiate(sequelize) {
-        Info_board_comment.init(
+        Coding_board_file.init(
             {
-                comment_id: {
+                file_id: {
                     type: DataTypes.INTEGER,
                     primaryKey: true,
                     autoIncrement: true,
                     allowNull: false,
                 },
-                parent_comment_id: {
-                    type: DataTypes.INTEGER,
-                    allowNull: true,
-                },
-                user_name: {
+                file_name: {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                comment: {
+                file_path: {
                     type: DataTypes.STRING,
                     allowNull: false,
-                },
+                }
             },
             {
                 sequelize,
-                modelName: "Info_board_comment",
-                tableName: "info_board_comments",
+                modelName: "Coding_board_file",
+                tableName: "coding_board_files",
                 underscored: true,
                 timestamps: true,
                 paranoid: true,
@@ -38,9 +34,8 @@ class Info_board_comment extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Info_board_comment.belongsTo(db.User);
-        db.Info_board_comment.belongsTo(db.Info_board);
+        db.Coding_board_file.belongsTo(db.Coding_board);
     }
 }
 
-module.exports = Info_board_comment;
+module.exports = Coding_board_file;

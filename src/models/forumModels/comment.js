@@ -1,33 +1,41 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 
-class Info_board extends Sequelize.Model {
+class Comment extends Sequelize.Model {
     static initiate(sequelize) {
-        Info_board.init(
+        Comment.init(
             {
-                post_id: {
+                comment_id: {
                     type: DataTypes.INTEGER,
                     primaryKey: true,
                     autoIncrement: true,
                     allowNull: false,
                 },
+                post_id: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                user_id: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                parent_comment_id: {
+                    type: DataTypes.INTEGER,
+                    allowNull: true,
+                },
                 user_name: {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                title: {
+                comment: {
                     type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                content: {
-                    type: DataTypes.JSON,
                     allowNull: false,
                 },
             },
             {
                 sequelize,
-                modelName: "Info_board",
-                tableName: "info_boards",
+                modelName: "Comment",
+                tableName: "comments",
                 underscored: true,
                 timestamps: true,
                 paranoid: true,
@@ -36,11 +44,6 @@ class Info_board extends Sequelize.Model {
             }
         );
     }
-
-    static associate(db) {
-        db.Info_board.belongsTo(db.User);
-        db.Info_board.hasMany(db.Info_board_comment);
-    }
 }
 
-module.exports = Info_board;
+module.exports = Comment;
