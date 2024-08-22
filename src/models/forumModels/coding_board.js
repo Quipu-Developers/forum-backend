@@ -19,6 +19,7 @@ class CodingBoard extends Board {
     static associate(db) {
         db.CodingBoard.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
         db.CodingBoard.hasMany(db.CodingBoardComment, { foreignKey: 'post_id', sourceKey: 'post_id' });
+        db.CodingBoard.hasMany(db.CodingBoardFile);
     }
 }
 
