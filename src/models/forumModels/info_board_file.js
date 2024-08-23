@@ -1,24 +1,13 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const CodingBoardFile = require('./coding_board_file.js');
 
-class InfoBoardFile extends Sequelize.Model {
+class InfoBoardFile extends CodingBoardFile {
     static initiate(sequelize) {
+        super.initiate(sequelize);
         InfoBoardFile.init(
             {
-                file_id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true,
-                    allowNull: false,
-                },
-                file_name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                file_path: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                }
+                // 부모 클래스(Board)의 필드를 수동으로 정의
+                ...CodingBoardFile.rawAttributes,
+                // 추가적인 필드가 있다면 여기서 추가 allowNull: false,
             },
             {
                 sequelize,
@@ -34,7 +23,7 @@ class InfoBoardFile extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.InfoBoardFile.belongsTo(db.InfoBoard);
+        db.InfoBoardFile.belongsTo(db.InfoBoard, {foreignKey : 'post_id', targetKey : 'post_id'});
     }
 }
 

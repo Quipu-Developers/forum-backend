@@ -47,14 +47,13 @@ class User extends Sequelize.Model {
   }
 
   static associate(db) {
-      db.User.hasMany(db.FreeBoard);
-      db.User.hasMany(db.FreeBoardComment)
-      db.User.hasMany(db.CodingBoard);
-      db.User.hasMany(db.CodingBoardComment)
-      db.User.hasMany(db.InfoBoard);
-      db.User.hasMany(db.InfoBoardComment)
-      db.User.hasMany(db.Gallery);
-
+      db.User.hasMany(db.FreeBoard, { foreignKey: 'user_id', sourceKey: 'user_id' });
+      db.User.hasMany(db.FreeBoardComment, { foreignKey: 'user_id', sourceKey: 'user_id' })
+      db.User.hasMany(db.CodingBoard, { foreignKey: 'user_id', sourceKey: 'user_id' });
+      db.User.hasMany(db.CodingBoardComment, { foreignKey: 'user_id', sourceKey: 'user_id' })
+      db.User.hasMany(db.InfoBoard, { foreignKey: 'user_id', sourceKey: 'user_id' });
+      db.User.hasMany(db.InfoBoardComment, { foreignKey: 'user_id', sourceKey: 'user_id' })
+      db.User.hasMany(db.Gallery, { foreignKey: 'user_id', sourceKey: 'user_id' });
   }
 }
 
