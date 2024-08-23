@@ -1,12 +1,12 @@
-const Comment = require('./comment');
+const CodingBoardComment = require('./coding_board_comment');
 
-class FreeBoardComment extends Comment {
+class FreeBoardComment extends CodingBoardComment {
     static initiate(sequelize) {
         super.initiate(sequelize);
         FreeBoardComment.init(
             {
                 // 부모 클래스(Board)의 필드를 수동으로 정의
-                ...Comment.rawAttributes,
+                ...CodingBoardComment.rawAttributes,
                 // 추가적인 필드가 있다면 여기서 추가
             },
             {

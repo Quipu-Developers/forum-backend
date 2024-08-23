@@ -1,9 +1,9 @@
 const Sequelize = require("sequelize");
 const fs = require('fs');
 const path = require('path');
-const env = process.env.NODE_ENV || 'development';
-const forumConfig = require(__dirname + "/../config/forumConfig.json")[env];
-const joinquipuConfig = require(__dirname + "/../config/forumConfig.json")[env];
+const env = process.env.NODE_ENV || 'test';
+const forumConfig = require(path.join(__dirname, "../config/forumConfig.json"))[env];
+const joinquipuConfig = require(path.join(__dirname, "../config/joinquipuConfig.json"))[env];
 
 const db = {}
 const forumSequelize = new Sequelize(
@@ -12,6 +12,7 @@ const forumSequelize = new Sequelize(
   forumConfig.password,
   forumConfig
 );
+
 const joinquipuSequelize = new Sequelize(
   joinquipuConfig.database,
   joinquipuConfig.username,
@@ -52,7 +53,6 @@ Object.keys(db).forEach(modelName => { // associate 호출
     db[modelName].associate(db);
   }
 });
-
 
 module.exports = db;
 

@@ -1,26 +1,52 @@
-const Comment = require('./comment');
+const { DataTypes } = require('sequelize');
+const Sequelize = require('sequelize');
 
-class CodingBoardComment extends Comment {
+class CodingBoardComment extends Sequelize.Model {
     static initiate(sequelize) {
-        super.initiate(sequelize);
         CodingBoardComment.init(
             {
-                // 부모 클래스(Board)의 필드를 수동으로 정의
-                ...Comment.rawAttributes,
-                // 추가적인 필드가 있다면 여기서 추가
+                comment_id: {
+                    type: DataTypes.INTEGER,
+                    primaryKey: true,
+                    autoIncrement: true,
+                    allowNull: false,
+                },
+                post_id: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                user_id: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                parent_comment_id: {
+                    type: DataTypes.INTEGER,
+                    allowNull: true,
+                },
+                user_name: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                },
+                comment: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                },
             },
             {
                 sequelize,
-                modelName: 'CodingBoardComment',
-                tableName: 'coding_board_comments',
+                modelName: "CodingBoardComment",
+                tableName: "coding_board_comments",
+                underscored: true,
+                timestamps: true,
+                paranoid: true,
+                charset: "utf8mb4",
+                collate: "utf8mb4_general_ci",
             }
         );
     }
-
     static associate(db) {
-        db.CodingBoardComment.belongsTo(db.User, { foreignKey: 'user_id' , targetKey : 'user_id'});
-        db.CodingBoardComment.belongsTo(db.CodingBoard, { foreignKey: 'post_id' ,targetKey : 'post_id'});
-        // post_id가 CodingBoardComment 의 필드로 존재하지 않는다는 오류 발생
+        db.CodingBoardComment.belongsTo(db.User, {foreignKey : 'user_id', targetKey : 'user_id'});
+        db.CodingBoardComment.belongsTo(db.CodingBoard, {foreignKey : 'post_id', targetKey : 'post_id'});
     }
 }
 
