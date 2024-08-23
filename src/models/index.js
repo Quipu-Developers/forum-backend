@@ -2,8 +2,8 @@ const Sequelize = require("sequelize");
 const fs = require('fs');
 const path = require('path');
 const env = process.env.NODE_ENV || 'test';
-const forumConfig = require(__dirname + "/../config/forumConfig.json")[env];
-const joinquipuConfig = require(__dirname + "/../config/joinquipuConfig.json")[env];
+const forumConfig = require(__dirname + "/config/forumConfig.json")[env];
+const joinquipuConfig = require(__dirname + "/config/joinquipuConfig.json")[env];
 
 const db = {}
 const forumSequelize = new Sequelize(
@@ -12,6 +12,7 @@ const forumSequelize = new Sequelize(
   forumConfig.password,
   forumConfig
 );
+
 const joinquipuSequelize = new Sequelize(
   joinquipuConfig.database,
   joinquipuConfig.username,

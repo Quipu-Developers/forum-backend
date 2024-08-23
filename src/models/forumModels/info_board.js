@@ -1,47 +1,27 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const Board = require('./board');
 
-class Info_board extends Sequelize.Model {
+class InfoBoard extends Board {
     static initiate(sequelize) {
-        Info_board.init(
+        super.initiate(sequelize);  // 부모 클래스(Post)의 initiate 메서드 호출
+        InfoBoard.init(
             {
-                post_id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true,
-                    allowNull: false,
-                },
-                user_name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                title: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                content: {
-                    type: DataTypes.JSON,
-                    allowNull: false,
-                },
+                // 부모 클래스(Board)의 필드를 수동으로 정의
+                ...Board.rawAttributes,
+                // 추가적인 필드가 있다면 여기서 추가
             },
             {
                 sequelize,
-                modelName: "Info_board",
-                tableName: "info_boards",
-                underscored: true,
-                timestamps: true,
-                paranoid: true,
-                charset: "utf8mb4",
-                collate: "utf8mb4_general_ci",
+                modelName: 'InfoBoard',
+                tableName: 'info_boards',
             }
         );
     }
 
     static associate(db) {
-        db.Info_board.belongsTo(db.User);
-        db.Info_board.hasMany(db.Info_board_comment);
-        db.Info_board.hasMany(db.Info_board_file);
+        db.InfoBoard.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
+        db.InfoBoard.hasMany(db.InfoBoardComment, { foreignKey: 'post_id', sourceKey: 'post_id' });
+        db.InfoBoard.hasMany(db.InfoBoardFile);
     }
 }
 
-module.exports = Info_board;
+module.exports = InfoBoard;

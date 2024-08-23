@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
 const Sequelize = require('sequelize');
 
-class Info_board_file extends Sequelize.Model {
+class InfoBoardFile extends Sequelize.Model {
     static initiate(sequelize) {
-        Info_board_file.init(
+        InfoBoardFile.init(
             {
                 file_id: {
                     type: DataTypes.INTEGER,
@@ -34,8 +34,8 @@ class Info_board_file extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Info_board_file.belongsTo(db.Info_board);
+        db.InfoBoardFile.belongsTo(db.InfoBoard);
     }
 }
 
-module.exports = Info_board_file;
+module.exports = InfoBoardFile;

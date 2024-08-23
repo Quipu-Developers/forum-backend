@@ -1,47 +1,27 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const Board = require('./board');
 
-class Free_board extends Sequelize.Model {
+class FreeBoard extends Board {
     static initiate(sequelize) {
-        Free_board.init(
+        super.initiate(sequelize);
+        FreeBoard.init(
             {
-                post_id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true,
-                    allowNull: false,
-                },
-                user_name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                title: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                content: {
-                    type: DataTypes.JSON,
-                    allowNull: false,
-                },
+                // 부모 클래스(Board)의 필드를 수동으로 정의
+                ...Board.rawAttributes,
+                // 추가적인 필드가 있다면 여기서 추가
             },
             {
                 sequelize,
-                modelName: "Free_board",
-                tableName: "free_boards",
-                underscored: true,
-                timestamps: true,
-                paranoid: true,
-                charset: "utf8mb4",
-                collate: "utf8mb4_general_ci",
+                modelName: 'FreeBoard',
+                tableName: 'free_boards',
             }
         );
     }
 
     static associate(db) {
-        db.Free_board.belongsTo(db.User);
-        db.Free_board.hasMany(db.Free_board_comment);
-        db.Free_board.hasMany(db.Free_board_file);
+        db.FreeBoard.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
+        db.FreeBoard.hasMany(db.FreeBoardComment, { foreignKey: 'post_id', sourceKey: 'post_id' });
+        db.FreeBoard.hasMany(db.FreeBoardFile);
     }
 }
 
-module.exports = Free_board;
+module.exports = FreeBoard;

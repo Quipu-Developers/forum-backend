@@ -47,12 +47,12 @@ class User extends Sequelize.Model {
   }
 
   static associate(db) {
-      db.User.hasMany(db.Free_board);
-      db.User.hasMany(db.Free_board_comment)
-      db.User.hasMany(db.Coding_board);
-      db.User.hasMany(db.Coding_board_comment)
-      db.User.hasMany(db.Info_board);
-      db.User.hasMany(db.Info_board_comment)
+      db.User.hasMany(db.FreeBoard);
+      db.User.hasMany(db.FreeBoardComment)
+      db.User.hasMany(db.CodingBoard);
+      db.User.hasMany(db.CodingBoardComment)
+      db.User.hasMany(db.InfoBoard);
+      db.User.hasMany(db.InfoBoardComment)
       db.User.hasMany(db.Gallery);
 
   }

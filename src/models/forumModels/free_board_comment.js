@@ -1,46 +1,26 @@
-const { DataTypes } = require("sequelize");
-const Sequelize = require('sequelize');
+const Comment = require('./comment');
 
-class Free_board_comment extends Sequelize.Model {
-  static initiate(sequelize) {
-    Free_board_comment.init(
-      {
-        comment_id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-            allowNull: false,
-        },
-        parent_comment_id: {
-          type: DataTypes.INTEGER,
-          allowNull: true,
-        },
-        user_name: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        comment: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-      },
-      {
-        sequelize,
-        modelName: "Free_board_comment",
-        tableName: "free_board_comments",
-          underscored: true,
-        timestamps: true,
-        paranoid: true,
-        charset: "utf8mb4",
-        collate: "utf8mb4_general_ci",
-      }
-    );
-  }
+class FreeBoardComment extends Comment {
+    static initiate(sequelize) {
+        super.initiate(sequelize);
+        FreeBoardComment.init(
+            {
+                // 부모 클래스(Board)의 필드를 수동으로 정의
+                ...Comment.rawAttributes,
+                // 추가적인 필드가 있다면 여기서 추가
+            },
+            {
+                sequelize,
+                modelName: 'FreeBoardComment',
+                tableName: 'free_board_comments',
+            }
+        );
+    }
 
-  static associate(db) {
-    db.Free_board_comment.belongsTo(db.User);
-    db.Free_board_comment.belongsTo(db.Free_board);
-  }
+    static associate(db) {
+        db.FreeBoardComment.belongsTo(db.User, {foreignKey : 'user_id', targetKey : 'user_id'});
+        db.FreeBoardComment.belongsTo(db.FreeBoard, {foreignKey : 'post_id', targetKey : 'post_id'});
+    }
 }
 
-module.exports = Free_board_comment;
+module.exports = FreeBoardComment;
