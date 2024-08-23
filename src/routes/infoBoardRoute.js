@@ -1,5 +1,6 @@
 const express = require('express');
-const infoBoardController = require('../controllers/infoBoardController');
+const boardController = require('../controllers/boardController');
+const InfoBoard = require('../models/forumModels/info_board');
 
 const router = express.Router();
 
@@ -23,10 +24,14 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
+ *               - user_id
  *               - user_name
  *               - title
  *               - content
  *             properties:
+ *               user_id:
+ *                 type: integer
+ *                 description: ID of the user
  *               user_name:
  *                 type: string
  *                 description: Name of the user
@@ -40,6 +45,7 @@ const router = express.Router();
  *             example1:
  *               summary: An example of a request body
  *               value:
+ *                 user_id: 1
  *                 user_name: "test_user"
  *                 title: "Test Title"
  *                 content: {"body": "Test Content"}
@@ -49,7 +55,7 @@ const router = express.Router();
  *       500:
  *         description: Some server error
  */
-router.post('/info/posts', infoBoardController.createPost);
+router.post('/info/posts', (req,res) => boardController.createPost(InfoBoard,req,res));
 
 /**
  * @swagger
@@ -69,7 +75,7 @@ router.post('/info/posts', infoBoardController.createPost);
  *       500:
  *         description: Some server error
  */
-router.get('/info/posts', infoBoardController.getAllPosts);
+router.get('/info/posts', (req, res) => boardController.getAllPosts(InfoBoard,req,res));
 
 /**
  * @swagger
@@ -96,7 +102,7 @@ router.get('/info/posts', infoBoardController.getAllPosts);
  *       500:
  *         description: Some server error
  */
-router.get('/info/posts/:id', infoBoardController.getPostById);
+router.get('/info/posts/:id', (req, res) => boardController.getPostById(InfoBoard,req,res));
 
 /**
  * @swagger
@@ -139,7 +145,7 @@ router.get('/info/posts/:id', infoBoardController.getPostById);
  *       500:
  *         description: Some server error
  */
-router.put('/info/posts/:id', infoBoardController.updatePost);
+router.put('/info/posts/:id', (req, res) => boardController.updatePost(InfoBoard,req,res));
 
 /**
  * @swagger
@@ -162,6 +168,6 @@ router.put('/info/posts/:id', infoBoardController.updatePost);
  *       500:
  *         description: Some server error
  */
-router.delete('/info/posts/:id', infoBoardController.deletePost);
+router.delete('/info/posts/:id', (req, res) => boardController.deletePost(InfoBoard,req,res));
 
 module.exports = router;

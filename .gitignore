@@ -2,3 +2,5 @@ config/*.json
 config.json
 src/config/config.json
 src/config/*.json
+src/initialize.js
+config
